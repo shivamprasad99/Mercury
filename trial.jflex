@@ -1,9 +1,11 @@
 import java.io.*;
+import java.lang.*;
+import java_cup.runtime.*;
 %%
 
 %{
 void printf(String s){
-    System.out.println(s);
+    //System.out.print();
 }
 %}
 
