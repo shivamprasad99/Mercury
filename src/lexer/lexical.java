@@ -1,6 +1,8 @@
-import java.io.*;
+package lexer;
+import grammar.*;
 
-public class lexer{
+import java.io.*;
+public class lexical{
     public static void main( String[] argv ) {
         try {
             if ( argv.length != 1 )
@@ -8,7 +10,7 @@ public class lexer{
             File file = new File(argv[0]);
             BufferedReader in = new BufferedReader(new FileReader(file));
             Yylex lexer = new Yylex(in);
-            System.out.println(lexer.yylex());
+            lexer.yylex();
         }
         catch ( Exception exception ) {
             System.out.println( "Exception in Main "+ exception.toString() );

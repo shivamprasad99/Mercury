@@ -1,11 +1,11 @@
+package grammar;
 import java.io.*;
 import java.lang.*;
-import java_cup.runtime.*;
 %%
 
 %{
 void printf(String s){
-    //System.out.print();
+    System.out.print(s);
 }
 %}
 
@@ -16,6 +16,7 @@ sType =                                          sb|sh|sw
 sbType =                                         beq|bge|bgeu|blt|bne|bltu
 ujType  =                                        jal
 %standalone
+%public
 
 %%
 
