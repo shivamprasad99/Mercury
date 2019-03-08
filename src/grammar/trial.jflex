@@ -1,6 +1,7 @@
 package grammar;
 import java.io.*;
 import java.lang.*;
+import java_cup.runtime.*;
 %%
 
 %{
