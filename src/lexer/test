@@ -68,7 +68,7 @@ sw x11, 0(x13)
 li x11 0x00007000
 and x11, x11, x7
 addi x13, x17, 8
-sw x11, 0(x13)
+sw x11 x13 0
 li x11 0x000f1000
 and x11, x11, x7
 addi x13, x17, 12
