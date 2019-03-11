@@ -82,13 +82,13 @@ public class lexical{
         return ans.toString();
     }
 
-    private static String immediateToBits12(String str){  // accepts a decimal value and returns converted 12 bit binary string
-        StringBuffer ans = new StringBuffer(12);
+    private static String immediateToBits(String str,int length){  // accepts a +ve decimal value and returns converted binary string
+        StringBuffer ans = new StringBuffer(length);
         int val = 0;
         for(int i=0;i<str.length();i++){
             val = val*10 + Character.getNumericValue(str.charAt(i));
         }
-        for(int i=0;i<12;i++){
+        for(int i=0;i<length;i++){
             if(val%2==0){
                 ans.append('0');
             }
@@ -101,24 +101,6 @@ public class lexical{
         return ans.toString();
     }
 
-    private static String immediateToBits20(String str){  // accepts a decimal value and returns converted 12 bit binary string
-        StringBuffer ans = new StringBuffer(20);
-        int val = 0;
-        for(int i=0;i<str.length();i++){
-            val = val*10 + Character.getNumericValue(str.charAt(i));
-        }
-        for(int i=0;i<20;i++){
-            if(val%2==0){
-                ans.append('0');
-            }
-            else{
-                ans.append('1');
-            }
-            val /= 2;
-        }
-        ans.reverse();
-        return ans.toString();
-    }
 
     private static String decode_R(Yylex lexer,String instruction){
         StringBuffer output = new StringBuffer(32);
@@ -156,7 +138,7 @@ public class lexical{
                 System.out.println(instruction);
             }
             lexer.yylex();
-            String imm = immediateToBits12(lexer.yytext());
+            String imm = immediateToBits(lexer.yytext(),12);
             output.append(imm);
             output.append(rs1);
             output.append(d.func3);
@@ -177,7 +159,7 @@ public class lexical{
             lexer.yylex();
             String rd = registerToBits(lexer.yytext());
             lexer.yylex();
-            String imm = immediateToBits20(lexer.yytext());
+            String imm = immediateToBits(lexer.yytext(),20);
             output.append(imm);
             output.append(rd);
             output.append(d.opcode);
@@ -199,7 +181,7 @@ public class lexical{
             lexer.yylex();
             String rs1 = registerToBits(lexer.yytext());
             lexer.yylex();
-            String imm = immediateToBits12(lexer.yytext());
+            String imm = immediateToBits(lexer.yytext(),12);
             output.append(imm.substring(0,7));
             output.append(rs2);
             output.append(rs1);
@@ -221,9 +203,39 @@ public class lexical{
             lexer.yylex();
             String rd = registerToBits(lexer.yytext());
             lexer.yylex();
-            String imm = immediateToBits20(lexer.yytext());
-            output.append(imm);
+            String imm = immediateToBits(lexer.yytext(),21);
+            output.append(imm.charAt(0));
+            output.append(imm.substring(10,20));
+            output.append(imm.charAt(9));
+            output.append(imm.substring(1,9));
             output.append(rd);
+            output.append(d.opcode);
+        }
+        catch ( Exception exception ) {
+            System.out.println( "Exception in Main "+ exception.toString() );
+            exception.printStackTrace();
+        }
+        return output.toString();
+    }
+
+    private static String decode_SB(Yylex lexer,String instruction){
+        StringBuffer output = new StringBuffer(32);
+        Data d = ins.get(instruction);
+        try {
+            lexer.yylex();
+            String rs1 = registerToBits(lexer.yytext());
+            lexer.yylex();
+            String rs2 = registerToBits(lexer.yytext());
+            lexer.yylex();
+            String imm = immediateToBits(lexer.yytext(),13);
+            System.out.println(imm);
+            output.append(imm.charAt(0));
+            output.append(imm.substring(2,8));
+            output.append(rs2);
+            output.append(rs1);
+            output.append(d.func3);
+            output.append(imm.substring(8,12));
+            output.append(imm.charAt(1));
             output.append(d.opcode);
         }
         catch ( Exception exception ) {
@@ -242,7 +254,7 @@ public class lexical{
             BufferedReader br = new BufferedReader(new FileReader(file));
             BufferedWriter writer = new BufferedWriter(new FileWriter("converted.mc"));
             Yylex lexer = new Yylex(br);
-            int n = lexer.yylex();
+            int n = 0;
             while(n>=0){
                 n = lexer.yylex();
                 if(n==3){
@@ -274,7 +286,11 @@ public class lexical{
                     writer.write("\n");
                 }
                 if(n==7){
-
+                    String decoded = decode_SB(lexer,lexer.yytext());
+                    writer.write(Integer.toString(lexer.yylineno()));
+                    writer.write("\t");
+                    writer.write(decoded);
+                    writer.write("\n");
                 }
                 if(n==8){
                     String decoded = decode_UJ(lexer,lexer.yytext());
