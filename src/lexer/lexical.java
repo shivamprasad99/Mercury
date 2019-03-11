@@ -244,7 +244,6 @@ public class lexical{
             Yylex lexer = new Yylex(br);
             int n = lexer.yylex();
             while(n>=0){
-                n = lexer.yylex();
                 if(n==3){
                     String decoded = decode_R(lexer,lexer.yytext());
                     writer.write(Integer.toString(lexer.yylineno()));
@@ -283,6 +282,7 @@ public class lexical{
                     writer.write(decoded);
                     writer.write("\n");
                 }
+                n = lexer.yylex();
             }
             writer.close();
         }
