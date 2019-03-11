@@ -1,3 +1,115 @@
+<<<<<<< HEAD
+=======
+# Shivam Prasad
+# 2017csb1108
+# left - none right- Ripudaman
+# task 1
+.data
+address: .word 0x10001000
+opcodes: .word 3 35 51 51 51 19 99 111
+.text
+la x6 opcodes	# has the opcodes base address
+lw x4, address
+li x5 51	# here you can give the instruction you want to store at the address
+sw x5, 0(x4)
+lw x7, 0(x4)	# x7 contains the instruction
+li x8, 0x0000007f
+and x9, x7, x8	# contains the opcode
+li x5 0
+li x16 -1
+li x15 -1
+li x12 8
+loop: beq x5, x12, exitloop
+addi x10, x6, 0
+slli x5, x5, 2
+add x10, x10, x5
+lw x10, 0(x10)
+bne x10, x9, l1
+addi x15,x5,0	# x15 will hold the index of opcode if found
+l1:
+srli x5, x5, 2
+addi x5, x5, 1
+jal x15, 12
+exitloop:
+#
+bne x15, x16, true	# check if an opcode is found
+false:
+li x17 -1
+j end
+
+true:
+srli x15, x15, 2
+li x17, 0x20001000	# base starting address
+
+li x5, 0
+beq x15,x5,ls
+addi x5,x5, 1
+beq x15,x5,ls
+
+addi x5, x5,1
+beq x15,x5,asxs
+addi x5, x5,1
+beq x15,x5,asxs
+addi x5, x5,1
+beq x15,x5,asxs
+addi x5, x5,1
+beq x15,x5,asxs
+
+addi x5, x5, 1
+beq x15,x5,ls
+
+addi x5,x5,1
+beq x15,x5,jmp
+
+ls:
+sw x9, 0(x17)
+li x11 0x00000fa0
+and x11, x11, x7
+addi x13, x17, 4
+sw x11, 0(x13)
+li x11 0x00007000
+and x11, x11, x7
+addi x13, x17, 8
+sw x11 x13 0
+li x11 0x000f1000
+and x11, x11, x7
+addi x13, x17, 12
+sw x11, 0(x13)
+li x11 0x01f00000
+and x11, x11, x7
+addi x13, x17, 16
+sw x11, 0(x13)
+li x11 0xf7000000
+and x11, x11, x7
+addi x13, x17, 20
+sw x11, 0(x13)
+j end
+
+asxs:
+sw x9, 0(x17)
+li x11 0x00000fa0
+and x11, x11, x7
+addi x13, x17, 4
+sw x11, 0(x13)
+li x11 0x00007000
+and x11, x11, x7
+addi x13, x17, 8
+sw x11, 0(x13)
+li x11 0x000f1000
+and x11, x11, x7
+addi x13, x17, 12
+sw x11, 0(x13)
+li x11 0x01f00000
+and x11, x11, x7
+addi x13, x17, 16
+sw x11, 0(x13)
+li x11 0xf7000000
+and x11, x11, x7
+addi x13, x17, 20
+sw x11, 0(x13)
+j end
+
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
 jmp:
 sw x9, 0(x17)
 and x11, x11, x7

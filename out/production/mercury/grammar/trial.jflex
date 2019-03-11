@@ -1,6 +1,10 @@
 package grammar;
 import java.io.*;
 import java.lang.*;
+<<<<<<< HEAD
+=======
+import java_cup.runtime.*;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
 %%
 
 %{
@@ -25,10 +29,17 @@ pseudo =                                         li|la
 
 %%
 
+<<<<<<< HEAD
 [\t\, ]+                                        {/* ignore whitespace */;return 19;}
 "#".*[^\n]                                      {/*printf("Comment ");*/return 0;}
 :                                               {/*printf("Colon ");*/return 1;}
 [\n]                                            {yyline++;/*printf("\n");*/return 18;}  /*new change*/
+=======
+[\t\, ]+                                        {/* ignore whitespace */;} 
+"#".*[^\n]                                      {/*printf("Comment ");*/return 0;}
+:                                               {/*printf("Colon ");*/return 1;}
+[\n]                                            {yyline++;/*printf("\n");*/}
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
 ".data"|".text"                                 {/*printf("Directive ");*/return 2;}
 {rType}                                         {/*printf("Instruction ");*/return 3;}
 {iType}                                         {/*printf("Instruction ");*/return 4;}
@@ -41,8 +52,14 @@ pseudo =                                         li|la
 "0x"[0-9a-f]+                                   {/*printf("Hex ");*/return 11;}
 "x"[0-9]+                                       {/*printf("Register ");*/return 12;}
 [-]?[1-9]+                                      {/*printf("Number ");*/return 13;}
+<<<<<<< HEAD
 [a-zA-Z]+(:)                                    {/*printf("LabelSource");*/return 16;}        /* new_change */
 [a-zA-Z]+                                       {/*printf("Label ");*/return 14;}
 [0-9]+\([x][0-9]*\)                                {/*printf("Memory ");*/return 15;}
 
 .                                               {/*printf("Unexpected ");*/return 17;}  /* new_change */
+=======
+[a-zA-Z]+                                       {/*printf("Label ");*/return 14;}
+[0]\([x][0-9]*\)                                {/*printf("Memory ");*/return 15;}
+.                                               {/*printf("Unexpected ");*/return 16;}
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed

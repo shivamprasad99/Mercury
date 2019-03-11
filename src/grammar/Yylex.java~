@@ -53,6 +53,7 @@ public class Yylex {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\10\2\1\3\1\1\1\4\1\5\1\6"+
+<<<<<<< HEAD
     "\2\1\1\7\1\1\2\0\5\2\1\10\1\11\3\2"+
     "\3\12\1\13\1\2\3\14\5\2\1\15\1\2\1\3"+
     "\2\16\5\0\2\7\2\0\3\2\1\14\2\11\1\17"+
@@ -61,6 +62,16 @@ public class Yylex {
 
   private static int [] zzUnpackAction() {
     int [] result = new int[83];
+=======
+    "\2\1\1\7\1\1\2\0\5\2\1\10\3\2\3\11"+
+    "\1\12\1\2\3\13\5\2\1\14\1\2\1\3\2\15"+
+    "\4\0\1\7\2\0\3\2\1\13\2\10\1\16\2\17"+
+    "\1\20\2\0\1\21\3\0\3\2\2\0\1\22\2\23"+
+    "\1\24";
+
+  private static int [] zzUnpackAction() {
+    int [] result = new int[80];
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -87,6 +98,7 @@ public class Yylex {
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\43\0\106\0\151\0\214\0\257\0\322\0\365"+
     "\0\u0118\0\u013b\0\u015e\0\u0181\0\u01a4\0\u01a4\0\43\0\u01c7"+
+<<<<<<< HEAD
     "\0\u01ea\0\u020d\0\u0230\0\u0253\0\u0276\0\u0299\0\u02bc\0\u02df"+
     "\0\u0302\0\u0325\0\u01a4\0\u0348\0\u036b\0\u038e\0\u03b1\0\u0302"+
     "\0\u0325\0\u0299\0\u0299\0\u03d4\0\u03f7\0\u041a\0\u043d\0\u0460"+
@@ -99,6 +111,19 @@ public class Yylex {
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[83];
+=======
+    "\0\u01ea\0\u020d\0\u020d\0\u0230\0\u0253\0\u0276\0\u0299\0\u02bc"+
+    "\0\u02df\0\u0302\0\u0325\0\u0348\0\u036b\0\u038e\0\u02df\0\u0302"+
+    "\0\u0276\0\u0276\0\u03b1\0\u03d4\0\u03f7\0\u041a\0\u043d\0\u0460"+
+    "\0\u0483\0\u04a6\0\u04c9\0\u04ec\0\u050f\0\u0532\0\u0181\0\u01a4"+
+    "\0\u0555\0\u0578\0\u059b\0\u05be\0\u05e1\0\u0604\0\u0627\0\u064a"+
+    "\0\u066d\0\u0690\0\u0276\0\u06b3\0\u0276\0\u0276\0\u0276\0\u06d6"+
+    "\0\u06f9\0\u071c\0\u073f\0\u059b\0\u0762\0\u0785\0\u07a8\0\u07cb"+
+    "\0\u07ee\0\u0811\0\u0834\0\u0857\0\u01a4\0\u01a4\0\u0276\0\u01a4";
+
+  private static int [] zzUnpackRowMap() {
+    int [] result = new int[80];
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -125,6 +150,7 @@ public class Yylex {
     "\1\10\1\11\1\4\1\12\7\4\1\13\1\14\1\15"+
     "\1\16\1\17\1\20\1\4\1\21\1\4\1\22\1\23"+
     "\1\4\2\2\12\0\1\24\3\0\1\25\25\0\1\26"+
+<<<<<<< HEAD
     "\2\27\5\26\1\30\1\31\3\26\1\32\6\26\4\0"+
     "\1\33\1\0\1\26\1\0\1\26\2\0\1\26\3\0"+
     "\11\26\1\31\3\26\1\32\6\26\4\0\1\33\1\0"+
@@ -201,6 +227,72 @@ public class Yylex {
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[2275];
+=======
+    "\2\27\5\26\1\30\1\31\3\26\1\32\6\26\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\11\26\1\31"+
+    "\3\26\1\32\6\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\3\0\4\26\1\33\4\26\1\31\3\26\1\32"+
+    "\6\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\4\26\1\34\1\26\1\35\1\26\1\36\1\37\3\26"+
+    "\1\40\1\41\5\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\3\0\1\42\7\26\1\43\1\44\1\26\1\42"+
+    "\1\26\1\45\1\46\5\26\6\0\1\26\1\0\1\26"+
+    "\2\0\1\26\3\0\2\26\1\47\3\26\1\50\2\26"+
+    "\1\31\3\26\1\32\3\26\1\51\1\26\1\52\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\3\26\1\53"+
+    "\5\26\1\31\3\26\1\32\6\26\6\0\1\26\1\54"+
+    "\1\26\1\54\1\0\1\26\3\0\1\55\10\26\1\31"+
+    "\3\26\1\32\6\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\14\0\1\24\3\0\1\25\6\0\1\56\15\0"+
+    "\27\57\1\0\1\60\12\57\45\0\1\61\5\0\1\62"+
+    "\1\0\1\24\3\0\1\25\36\0\1\24\1\63\2\0"+
+    "\1\25\22\0\1\64\13\0\1\24\3\0\1\25\17\0"+
+    "\1\65\37\0\1\66\13\0\1\67\37\0\24\26\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\1\26\1\33"+
+    "\22\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\13\26\1\70\10\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\3\0\24\26\6\0\1\71\1\0\1\26\2\0"+
+    "\1\26\3\0\3\26\1\72\20\26\6\0\1\26\1\0"+
+    "\1\26\2\0\1\26\3\0\13\26\1\73\10\26\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\1\33\5\26"+
+    "\1\33\15\26\6\0\1\26\1\0\1\26\2\0\1\26"+
+    "\3\0\6\26\1\33\1\74\14\26\6\0\1\26\1\0"+
+    "\1\26\2\0\1\26\3\0\11\26\1\75\12\26\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\13\26\1\76"+
+    "\10\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\10\26\1\73\13\26\6\0\1\71\1\0\1\26\2\0"+
+    "\1\26\3\0\3\26\1\72\4\26\1\73\13\26\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\10\26\1\73"+
+    "\13\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\21\26\1\77\2\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\3\0\7\26\1\100\14\26\6\0\1\26\1\0"+
+    "\1\26\2\0\1\26\3\0\22\26\1\77\1\26\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\21\26\1\100"+
+    "\2\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\4\26\1\33\17\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\36\0\1\54\1\0\1\54\5\0\6\26\1\101"+
+    "\15\26\6\0\1\26\1\0\1\26\2\0\1\26\27\0"+
+    "\1\56\16\0\1\102\63\0\1\103\21\0\2\104\7\0"+
+    "\1\104\6\0\2\104\11\0\3\104\17\0\1\105\65\0"+
+    "\1\65\14\0\1\106\37\0\1\107\36\0\17\26\1\110"+
+    "\4\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\7\26\1\111\14\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\3\0\4\26\1\112\17\26\6\0\1\26\1\0"+
+    "\1\26\2\0\1\26\3\0\10\26\1\75\2\26\1\46"+
+    "\10\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\10\26\1\77\13\26\6\0\1\26\1\0\1\26\2\0"+
+    "\1\26\3\0\4\26\1\73\17\26\6\0\1\26\1\0"+
+    "\1\26\2\0\1\26\12\0\1\113\45\0\1\114\63\0"+
+    "\1\105\1\0\1\105\3\0\1\115\22\0\1\116\22\0"+
+    "\1\116\41\0\20\26\1\76\3\26\6\0\1\26\1\0"+
+    "\1\26\2\0\1\26\3\0\21\26\1\117\2\26\6\0"+
+    "\1\26\1\0\1\26\2\0\1\26\3\0\1\26\1\117"+
+    "\22\26\6\0\1\26\1\0\1\26\2\0\1\26\3\0"+
+    "\1\120\51\0\1\120\32\0";
+
+  private static int [] zzUnpackTrans() {
+    int [] result = new int[2170];
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -238,12 +330,21 @@ public class Yylex {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
+<<<<<<< HEAD
     "\1\0\13\1\2\11\5\1\2\0\5\1\1\11\25\1"+
     "\1\11\5\0\2\1\2\0\12\1\2\0\1\1\3\0"+
     "\3\1\2\0\2\11\1\1\1\11";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[83];
+=======
+    "\1\0\13\1\2\11\5\1\2\0\32\1\1\11\4\0"+
+    "\1\1\2\0\12\1\2\0\1\1\3\0\3\1\2\0"+
+    "\2\11\1\1\1\11";
+
+  private static int [] zzUnpackAttribute() {
+    int [] result = new int[80];
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -324,7 +425,7 @@ void printf(String s){
 }
 
 public int yylineno(){
-    return yyline+1;
+    return yyline;
 }
 
 
@@ -643,6 +744,7 @@ public int yylineno(){
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
+<<<<<<< HEAD
             { /*printf("Unexpected ");*/return 17;
             }
           case 22: break;
@@ -650,13 +752,27 @@ public int yylineno(){
             { /*printf("Label ");*/return 14;
             }
           case 23: break;
+=======
+            { /*printf("Unexpected ");*/return 16;
+            }
+          case 21: break;
+          case 2: 
+            { /*printf("Label ");*/return 14;
+            }
+          case 22: break;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           case 3: 
             { /* ignore whitespace */;return 19;
             }
+<<<<<<< HEAD
           case 24: break;
+=======
+          case 23: break;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           case 4: 
             { yyline++;/*printf("\n");*/return 18;
             }
+<<<<<<< HEAD
           case 25: break;
           case 5: 
             { System.out.print(yytext());
@@ -670,9 +786,25 @@ public int yylineno(){
             { /*printf("Number ");*/return 13;
             }
           case 28: break;
+=======
+          case 24: break;
+          case 5: 
+            { System.out.print(yytext());
+            }
+          case 25: break;
+          case 6: 
+            { /*printf("Colon ");*/return 1;
+            }
+          case 26: break;
+          case 7: 
+            { /*printf("Number ");*/return 13;
+            }
+          case 27: break;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           case 8: 
             { /*printf("LabelSource");*/return 16;
             }
+<<<<<<< HEAD
           case 29: break;
           case 9: 
             { /*printf("Instruction ");*/return 3;
@@ -682,25 +814,53 @@ public int yylineno(){
             { /*printf("Instruction ");*/return 6;
             }
           case 31: break;
+=======
+          case 28: break;
+          case 9: 
+            { /*printf("Instruction ");*/return 6;
+            }
+          case 29: break;
+          case 10: 
+            { /*printf("Pseudo ");*/return 9;
+            }
+          case 30: break;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           case 11: 
             { /*printf("Pseudo ");*/return 9;
             }
+<<<<<<< HEAD
           case 32: break;
           case 12: 
             { /*printf("Instruction ");*/return 4;
             }
           case 33: break;
+=======
+          case 31: break;
+          case 12: 
+            { /*printf("Register ");*/return 12;
+            }
+          case 32: break;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           case 13: 
             { /*printf("Register ");*/return 12;
             }
+<<<<<<< HEAD
           case 34: break;
           case 14: 
             { /*printf("Comment ");*/return 0;
             }
           case 35: break;
+=======
+          case 33: break;
+          case 14: 
+            { /*printf("Instruction ");*/return 5;
+            }
+          case 34: break;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           case 15: 
             { /*printf("Instruction ");*/return 5;
             }
+<<<<<<< HEAD
           case 36: break;
           case 16: 
             { /*printf("Instruction ");*/return 7;
@@ -726,6 +886,29 @@ public int yylineno(){
             { /*printf("Directive ");*/return 2;
             }
           case 42: break;
+=======
+          case 35: break;
+          case 16: 
+            { /*printf("Instruction ");*/return 8;
+            }
+          case 36: break;
+          case 17: 
+            { /*printf("Hex ");*/return 11;
+            }
+          case 37: break;
+          case 18: 
+            { /*printf("Memory ");*/return 15;
+            }
+          case 38: break;
+          case 19: 
+            { /*printf("Datatype ");*/return 10;
+            }
+          case 39: break;
+          case 20: 
+            { /*printf("Directive ");*/return 2;
+            }
+          case 40: break;
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           default:
             zzScanError(ZZ_NO_MATCH);
         }

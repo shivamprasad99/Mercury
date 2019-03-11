@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="6f55b3d0-1d03-4db8-bbfd-3dda0fd718c2" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="6f55b3d0-1d03-4db8-bbfd-3dda0fd718c2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mercury.iml" beforeDir="false" afterPath="$PROJECT_DIR$/mercury.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/lexical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/lexical.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/test" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/test" afterDir="false" />
+    </list>
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -9,18 +18,32 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/mercury$lexical.ic" NAME="lexical Coverage Results" MODIFIED="1552035939871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>lexer.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="240" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/grammar/trial.jflex">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="919">
               <caret line="47" column="100" lean-forward="true" selection-start-line="47" selection-start-column="100" selection-end-line="47" selection-end-column="100" />
+=======
+            <state relative-caret-position="285">
+              <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/lexer/preLexical.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="415">
@@ -28,11 +51,21 @@
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#161#178#0" expanded="true" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/lexer/lexical.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="99" column="22" lean-forward="true" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#346#359#0" expanded="true" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lexer/lexical.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,11 +75,19 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#325#338#0" expanded="true" />
               </folding>
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/lexer/test">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/converted.mc">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -67,6 +108,15 @@
               <caret line="10" column="4" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
             </state>
           </provider>
+=======
+        <entry file="file://$PROJECT_DIR$/src/lexer/mercuryGUI.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/lexer/mercuryGUI.form">
+          <provider selected="true" editor-type-id="ui-designer" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
         </entry>
       </file>
     </leaf>
@@ -80,9 +130,19 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
       <find>16</find>
       <find>sys</find>
     </findStrings>
+=======
+      <find>main</find>
+      <find>&quot;);</find>
+      <find>jal</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>&quot;);*/</replace>
+    </replaceStrings>
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,27 +152,41 @@
       <list>
         <option value="$PROJECT_DIR$/grammar/trial.jflex" />
         <option value="$PROJECT_DIR$/lexer/lexical.java" />
-        <option value="$PROJECT_DIR$/src/lexer/lexical.java" />
         <option value="$PROJECT_DIR$/src/grammar/Yylex.java" />
         <option value="$PROJECT_DIR$/src/lexer/test" />
         <option value="$PROJECT_DIR$/src/grammar/trial.jflex" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/lexer/preLexical.java" />
+=======
+        <option value="$PROJECT_DIR$/src/lexer/lexical.java" />
+        <option value="$PROJECT_DIR$/src/lexer/test" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
       </list>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="335" />
     <option name="y" value="28" />
     <option name="width" value="1200" />
     <option name="height" value="675" />
+=======
+    <option name="y" value="27" />
+    <option name="width" value="960" />
+    <option name="height" value="988" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,6 +211,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="lexer" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
             <path>
               <item name="Mercury" type="b2602c69:ProjectViewProjectNode" />
               <item name="Mercury" type="462c0819:PsiDirectoryNode" />
@@ -144,16 +219,26 @@
               <item name="lexer" type="462c0819:PsiDirectoryNode" />
               <item name="lexical.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
+=======
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552304706447" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/java-cup-bin-11b-20160615/java-cup-11b-runtime.jar!/" />
     <property name="project.structure.last.edited" value="SDKs" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552300765749" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/java-cup-bin-11b-20160615/java-cup-11b.jar!/" />
+    <property name="project.structure.last.edited" value="Project" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
@@ -168,6 +253,12 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle" />
+      <command value="lexical" />
+    </option>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -180,11 +271,32 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager">
     <configuration name="lexical" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="lexer.lexical" />
       <module name="mercury" />
       <option name="PROGRAM_PARAMETERS" value="src/lexer/modified.asm" />
+=======
+  <component name="RunManager" selected="Application.lexical">
+    <configuration name="Yylex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="grammar.Yylex" />
+      <module name="mercury" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="grammar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lexical" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lexer.lexical" />
+      <module name="mercury" />
+      <option name="PROGRAM_PARAMETERS" value="src/lexer/test" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="lexer.*" />
@@ -195,9 +307,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <recent_temporary>
       <list>
         <item itemvalue="Application.lexical" />
+=======
+    <list>
+      <item itemvalue="Application.lexical" />
+      <item itemvalue="Application.Yylex" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.lexical" />
+        <item itemvalue="Application.Yylex" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
       </list>
     </recent_temporary>
   </component>
@@ -224,6 +347,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="0" y="28" width="1920" height="1052" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17326203" />
@@ -244,20 +368,84 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32899022" />
+=======
+    <frame x="0" y="27" width="960" height="988" extended-state="4" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17943107" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329849" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4994664" weight="0.329849" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50053364" side_tool="true" weight="0.329849" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.329849" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.2497332" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
+<<<<<<< HEAD
       <window_info anchor="right" id="Maven" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
+=======
+      <window_info anchor="right" id="Maven" order="4" weight="0.32977587" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32977587" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17943107" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.329849" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.4994664" visible="true" weight="0.329849" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50053364" side_tool="true" weight="0.329849" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.329849" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.2497332" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.32977587" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32977587" />
+    </layout-to-restore>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.asm" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/grammar/Yylex.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -295,32 +483,104 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mercury.iml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/lexer/test">
+=======
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
+          <caret line="371" column="38" selection-start-line="371" selection-start-column="38" selection-end-line="371" selection-end-column="38" />
+        </state>
+      </provider>
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mercury.iml">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="150">
           <caret line="10" column="4" lean-forward="true" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+=======
+        <state>
+          <caret column="32" selection-start-column="32" selection-end-column="32" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/converted.mc">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+=======
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/grammar/Yylex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="307" column="4" selection-start-line="307" selection-start-column="4" selection-end-line="307" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10621#10622#0" expanded="true" />
+            <element signature="e#10648#10649#0" expanded="true" />
+            <element signature="e#10672#10673#0" expanded="true" />
+            <element signature="e#10693#10694#0" expanded="true" />
+            <element signature="e#10789#10790#0" expanded="true" />
+            <element signature="e#10817#10818#0" expanded="true" />
+            <element signature="e#14529#14530#0" expanded="true" />
+            <element signature="e#14560#14561#0" expanded="true" />
+            <element signature="e#14698#14699#0" expanded="true" />
+            <element signature="e#14733#14734#0" expanded="true" />
+            <element signature="e#14845#14846#0" expanded="true" />
+            <element signature="e#14922#14923#0" expanded="true" />
+            <element signature="e#15280#15281#0" expanded="true" />
+            <element signature="e#15322#15323#0" expanded="true" />
+            <element signature="e#15420#15421#0" expanded="true" />
+            <element signature="e#15460#15461#0" expanded="true" />
+          </folding>
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lexer/lexical.java">
+    <entry file="file://$PROJECT_DIR$/src/grammar/trial.jflex">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="157">
           <caret line="242" column="73" selection-start-line="242" selection-start-column="73" selection-end-line="242" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#325#338#0" expanded="true" />
+=======
+        <state relative-caret-position="285">
+          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lexer/lexical.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="99" column="22" lean-forward="true" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#346#359#0" expanded="true" />
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/src/lexer/test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lexer/mercuryGUI.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lexer/mercuryGUI.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+>>>>>>> ec3e56e681ff6105b3c30370eff659add64575ed
   </component>
   <component name="masterDetails">
     <states>
