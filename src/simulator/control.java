@@ -29,8 +29,10 @@ public class control{
 
     public static void main(String args[]){
         int muxB, ra, rb, address_c, address_b, address_a, rz, ry, rm;
+        int pc_value = 0;
         int line_no = 0;
         BufferedReader file_reader;
+        List<Integer> opcode_func3_func7_rs1_rs2_rd_immidiate_n;
         try{
             file_reader = new BufferedReader(new FileReader("./test"));    
             String line = "";
@@ -38,7 +40,7 @@ public class control{
             while((line = file_reader.readLine()) !=null){
                 /*
                     here write code to send to decoder
-                    decoder(line);  in place of System.out.println(line)
+                    opcode_func3_func7_rs1_rs2_rd_immidiate = decoder(line);  in place of System.out.println(line)
 
                     I have a line no but what to do with it
                 */
@@ -49,6 +51,29 @@ public class control{
         catch(IOException e){
             System.out.println("You either deleted or shifted the file containing machine code");
         }
+
+
+        int which_instruction = opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(7);
+        PC pc_object = new PC();
+        register_file register_file_object = new register_file();
+        instructions instruction_object = new instructions(pc_object);  
+
+        ra = register_file_object.load_from_register(opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(3));
+        rb = register_file_object.load_from_register(opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(4));
+        
+        
+        if(which_instruction == 1){
+            muxB = rb;                          // just to get some feel
+            ry = instruction_object.add(ra, muxB, pc_value);    
+        }           
+        else if(which_instruction == 2){
+            muxB = rb;
+            ry = instruction_object.and(ra, muxB, pc_value);
+        }
+        else if(which_instruction == 12){
+            muxB = opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(6);
+            ry = instruction_object.jalr(ra, muxB, pc_value);
+        }   
     }
 }
 

@@ -1,0 +1,5 @@
+dependencies {
+  compile "junit:junit:4.10"
+  compile "org.easytesting:fest-assert-core:2.0M10"
+  compile "com.google.guava:guava:16+"
+}
