@@ -1,4 +1,3 @@
-package com.company;
 import java.io.*;
 import java.util.*;
 
@@ -26,7 +25,7 @@ public class memory {
         which_memory_element = which_memory_element + how_much;
     }
 
-    public static String load_in_memory(int address){
+    public static String load_from_memory(int address){
         checker();
         return memory_linked_hash_map.get(address);
     }

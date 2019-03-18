@@ -3,7 +3,6 @@
     first set_pc, set_muxPc, set_muxInc
     then use adder which will return the next pc
 */
-package com.company;
 // import class containg RA and RB;
 
 public class PC {
