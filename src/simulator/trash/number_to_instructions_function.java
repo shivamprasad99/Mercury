@@ -1,6 +1,11 @@
 class number_to_instrucions_function{
     public static void main(String args[]){
         LinkedHashMap<String, Interger> instruction_to_integer = new LinkedHashMap<String, Interger>();
+        
+        /*
+            name, number_specified, MuxB, MuxY, MuxMa, MuxPC, MuxINC
+        */
+        
         instruction_to_integer.put(1, 'add');
         instruction_to_integer.put(2, 'and');
         instruction_to_integer.put(3, 'or');
