@@ -19,20 +19,41 @@ public class memory {
         }
     }
 
-
-    public static void increment_decrement(int which_memory_element, int how_much){
+    public static void increment_code_start(int how_much){
         checker();
-        which_memory_element = which_memory_element + how_much;
+        code_start = code_start + how_much;
     }
+    public static void increment_data_start(int how_much){
+        checker();
+        data_start = data_start + how_much;
+    }
+    public static void increment_stack_start(int how_much){
+        checker();
+        stack_start = stack_start + how_much;
+    }
+
+    
 
     public static String load_from_memory(int address){
         checker();
         return memory_linked_hash_map.get(address);
     }
 
-    public static void store_in_memory(int which_memory_element, String value_to_be_stored){
+
+    public static void store_code_memory(String value_to_be_stored){
         checker();
-        memory_linked_hash_map.put(which_memory_element, value_to_be_stored);
+        memory_linked_hash_map.put(code_start, value_to_be_stored);
+        System.out.println(code_start + " " + value_to_be_stored);
     }
 
+    public static void store_data_memory(String value_to_be_stored){
+        checker();
+        memory_linked_hash_map.put(data_start, value_to_be_stored);
+        System.out.println(data_start + " " + value_to_be_stored);
+    }
+    public static void store_stack_memory(String value_to_be_stored){
+        checker();
+        memory_linked_hash_map.put(stack_start, value_to_be_stored);
+        System.out.println(stack_start + " " + value_to_be_stored);
+    }
 }

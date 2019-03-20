@@ -4,7 +4,8 @@ import java.util.*;
 class register_file{
     LinkedHashMap<Integer, Integer> register_address_to_value = new LinkedHashMap<Integer, Integer>();
     register_file(){
-        for(int i = 0; i < 32; i++){
+        register_address_to_value.put(0, 0);
+        for(int i = 1; i < 32; i++){
             register_address_to_value.put(i, Integer.MAX_VALUE);
         }
     }
