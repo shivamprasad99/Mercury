@@ -7,10 +7,10 @@ class instructions{
         pc_object = pc_object_value;
     }
 
-    public static int add(int ra, int rb, int pc_value){
+    public static int add(int ra, int rb){
         return ra+rb;
     }
-    public static int and(int ra, int rb, int pc_value){
+    public static int and(int ra, int rb){
         return ra + rb;
     }
     public static int jalr(int ra, int offset, int pc_value){

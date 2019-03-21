@@ -4,7 +4,7 @@ import java.util.*;
 public class control{ 
     static String IR;
     static int ra, rb, rd, rm, pc_value, immidiate;
-    static String ry, rz
+    static String ry, rz;
     static int muxB, muxY;
     static register_file register_file_object;
     static instructions instruction_object;
@@ -111,9 +111,10 @@ public class control{
         else if(muxY == 1){
             int address = Integer.parseInt(ry);
             rz = memory_object.load_from_memory(address);
+            // rm to memory to store
         }
         else if(muxY == 2){
-            
+
         }
     }
 
