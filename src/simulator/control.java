@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.*;
+import java.nio.*;
+import java.lang.Math;
 
 public class control{ 
     static String IR;
@@ -16,6 +18,7 @@ public class control{
 
     control(){
         pc_value = 0;
+        IR = "";
         register_file register_file_object = new register_file();
         instructions instruction_object = new instructions(pc_object);  
         memory memory_object = new memory();
@@ -45,12 +48,25 @@ public class control{
     }
 
 
-
+    static String convert_int_to_string(int value){
+        String s = "";
+        while(value!=0){
+            int temp = value % 2;
+            value /= 2; 
+            s = (char)(temp+48) + s;
+        }
+        return s;
+    }
 
 
     static void fetch(){
-        IR = memory_object.load_from_memory(pc_value);    
-        pc_value = pc_value+4;
+        
+        for(int i = 0; i < 4; i++){
+            int val = memory_object.loadByte(pc_value);
+            IR = IR + convert_int_to_string(val);
+            pc_value++; 
+        }
+
     }
 
 
@@ -110,11 +126,28 @@ public class control{
             ry = rz;
         else if(muxY == 1){
             int address = Integer.parseInt(ry);
-            rz = memory_object.load_from_memory(address);
+            // rz = memory_object.load_from_memory(address);
             // rm to memory to store
         }
         else if(muxY == 2){
 
+        }
+    }
+
+
+    static void storing_in_memory(String line_input){
+        char[] line = line_input.toCharArray();
+        for(int i = 0; i < 4; i++){
+            int out = 0;
+            for(int j = 8*i + 7; j >= 8*i; j--){
+                int current_no = 0;
+                if(line[j] == '0')
+                    current_no = 0;
+                else
+                    current_no = 1;
+                out += current_no * Math.pow(2, (8*i+7) - j);
+            }
+            memory_object.storeByte(out);
         }
     }
 
@@ -130,8 +163,7 @@ public class control{
             
             while((line = file_reader.readLine()) !=null){
                 line = convert_machine_code_line_to_instruction(line, line_no);
-                memory_object.store_code_memory(line);
-                memory_object.increment_code_start(4);
+                storing_in_memory(line);
             }
         }
         catch(IOException e){
