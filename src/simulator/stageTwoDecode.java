@@ -14,14 +14,9 @@ class Data{
 }
 
 public class stageTwoDecode{
-        private static Map<String,Data> ins = new HashMap<String,Data>();
-		static String  instructionType;
-		static String  instruction;
-		stageTwoDecode(){
-            instructionType = "";
-		    instruction = "";
-		
-        }
+		private static Map<String,Data> ins = new HashMap<String,Data>();
+		String instructionType="";
+		String instruction="";
 		public static String getType(String inst){
 			String instr = inst.substring(0, 1);
 			/*
@@ -85,10 +80,10 @@ public class stageTwoDecode{
 		        ins.put("Iandi",new Data("0010011","","111"));
 		        ins.put("Ijalr",new Data("1100111","","000"));
 		        ins.put("Ilb",new Data("0000011","","000"));
-		        ins.put("Ilw",new Data("0010011","","010"));
-		        ins.put("Ilh",new Data("0010011","","001"));
-		        ins.put("Ilhu",new Data("0010011","","101"));
-		        ins.put("Ilbu",new Data("0010011","","100"));
+		        ins.put("Ilw",new Data("0000011","","010"));
+		        ins.put("Ilh",new Data("0000011","","001"));
+		        ins.put("Ilhu",new Data("0000011","","101"));
+		        ins.put("Ilbu",new Data("0000011","","100"));
 		        //  ins.put("lwu",new Data(("0010011","","000"));
 		        ins.put("Iori",new Data("0010011","","110"));
 		        ins.put("Islli",new Data("0010011","","001"));
@@ -112,7 +107,7 @@ public class stageTwoDecode{
 		        ins.put("Jjal",new Data("1101111","",""));
 			}
 
-			private static int getInstructionNumber(String instruction){
+			private int getInstructionNumber(String instruction){
 				LinkedHashMap<String, Integer> instruction_to_integer = new LinkedHashMap<String, Integer>();
         		instruction_to_integer.put("add", 1);
                 instruction_to_integer.put("and", 2);
@@ -154,24 +149,26 @@ public class stageTwoDecode{
 
 			}
 
-		public static ArrayList<Integer> decode(String input){
-			// if(input == null){
-            //     System.out.println("String to be decoded is wrong");
-            //     System.exit(0);
-            // }
+		void print(){
+			System.out.println("sfa");
+		}
 
-			ArrayList<Integer> retVal = new ArrayList<>();
+		ArrayList<Integer> decode(String input){
+			if(input == null){
+                System.out.println("String to be decoded is wrong");
+                System.exit(0);
+            }
+            ArrayList<Integer> retVal = new ArrayList<>();
 			String inst = "";
-			// try{
+			try{
 					initialize();
-					String tempStr = "";
-                    tempStr = tempStr+input; /*Input*/
-					//////////////////////////////////
+					String tempStr = input; /*Input*/
+					////////////////////////////////////
 					// System.out.println(tempStr);
 					////////////////////////////////////
 					String opcode = tempStr.substring(25); /*getting opcode*/
 					String func7 = tempStr.substring(0, 7);/*getting function 7*/
-					String func3 = tempStr.substring(11, 14);/*getting function 3*/
+					String func3 = tempStr.substring(17, 20);/*getting function 3*/
 					///////////////////////////////////
 					// System.out.println(opcode);
 					// System.out.println(func3);
@@ -184,27 +181,27 @@ public class stageTwoDecode{
 						Data tempData = entry.getValue();
 						// System.out.println(insData2);
 						if(insData.opcode.equals(tempData.opcode) && insData.func3.equals(tempData.func3) && insData.func7.equals(tempData.func7)){
+								// System.out.println("1");
 								inst = inst + entry.getKey();
-								instruction = inst.substring(1);
-								instructionType = getType(inst);
-                                break;
+								instruction = instruction + inst.substring(1);
+								instructionType = instructionType + getType(inst);
 						}else if(insData1.opcode.equals(tempData.opcode) && insData1.func3.equals(tempData.func3) && insData1.func7.equals(tempData.func7)){
+							// System.out.println("2");
 								inst = inst + entry.getKey();
-								instruction = inst.substring(1);
-								instructionType = getType(inst);
-                                break;
+								instruction = instruction + inst.substring(1);
+								instructionType = instructionType + getType(inst);
 						}else if(insData2.opcode.equals(tempData.opcode) && insData2.func3.equals(tempData.func3) && insData2.func7.equals(tempData.func7)){
+							// System.out.println("3");
 								inst = inst + entry.getKey();
-								instruction = inst.substring(1);
-								instructionType = getType(inst);
-                                break;
+								instruction = instruction + inst.substring(1);
+								instructionType = instructionType + getType(inst);
 						}
 					}
-					/////////////////////////////////
-					// System.out.println(inst);
-					// System.out.println(instruction);
-					// System.out.println(instructionType);
-					/////////////////////////////////
+					///////////////////////////////////
+					System.out.println(tempStr);
+					System.out.println(instruction);
+					System.out.println(instructionType);
+					///////////////////////////////////
 					// retVal.add(opcode);
 					// retVal.add(func3);
 					// retVal.add(func7);
@@ -215,8 +212,7 @@ public class stageTwoDecode{
 						retVal.add(getRd(tempStr));
 						retVal.add(-1);
 						retVal.add(instructionNumber);
-					// System.out.println(retVal);
-						return retVal;
+						// return retVal;
 					}
 					if(instructionType.equals("I")){
 						retVal.add(getRs1(tempStr));
@@ -224,8 +220,7 @@ public class stageTwoDecode{
 						retVal.add(getRd(tempStr));
 						retVal.add(getIm(instructionType, tempStr));
 						retVal.add(instructionNumber);
-					// System.out.println(retVal);
-						return retVal;
+						// return retVal;
 					}
 					if(instructionType.equals("U") || instructionType.equals("UJ")){
 						retVal.add(-1);
@@ -233,7 +228,7 @@ public class stageTwoDecode{
 						retVal.add(getRd(tempStr));
 						retVal.add(getIm(instructionType, tempStr));
 						retVal.add(instructionNumber);
-						return retVal;
+						// return retVal;
 					}
 					if(instructionType.equals("S") || instructionType.equals("SB")){
 						retVal.add(getRs1(tempStr));
@@ -241,12 +236,15 @@ public class stageTwoDecode{
 						retVal.add(-1);
 						retVal.add(getIm(instructionType, tempStr));
 						retVal.add(instructionNumber);
-						return retVal;
+						// return retVal;
 					}
-			// }catch(Exception e){
-				// System.out.println("File not found: "+e);
-			// }
-			return null;
+			}catch(Exception e){
+				System.out.println(e);
+			}
+			// System.out.println("Size = "+retVal.get(4));
+			instructionType = "";
+			// tempStr = "";
+			instruction = "";
+			return retVal;
 		}
-
 }
