@@ -5,7 +5,7 @@ import java.lang.Math;
 
 public class control{ 
     static String IR = "";
-    static int ra, rb, rd, rm, pc_value, immidiate;
+    static int ra, rb, rd, rm, pc_value = 0, immidiate;
     static boolean condition_signal_beq = false; // control unit must set these accordingly
     static boolean condition_signal_bge = false; // control unit must set these accordingly
     static boolean condition_signal_bgeu = false; // control unit must set these accordingly
@@ -15,13 +15,26 @@ public class control{
     static int b_select, y_select, pc_select, inc_select, ma_select;
     static int ry, rz;
     static int muxB, muxY;
-    static register_file register_file_object;
+    static register_file register_file_object = new register_file();
     static instructions instruction_object;
-    static memory memory_object;
-    static number_to_instrucions_function control_and_name_of_instruction;
-    static PC pc_object;
+    static memory memory_object = new memory();
+    static number_to_instrucions_function control_and_name_of_instruction = new number_to_instrucions_function();;
+    static PC pc_object = new PC();
     static int line_no;
-    static stageTwoDecode decoder_object; 
+    static stageTwoDecode decoder_object = new stageTwoDecode(); 
+
+
+    // control(){
+    //     pc_value = 0;
+    //     IR = "";
+    //     register_file register_file_object = new register_file();
+    //     memory memory_object = new memory();
+    //     PC pc_object = new PC();
+    //     instructions instruction_object = new instructions(pc_object);  
+    //     number_to_instrucions_function control_and_name_of_instruction = new number_to_instrucions_function();
+    //     control_and_name_of_instruction.set_number_to_instrucions_function();
+    //     stageTwoDecode decoder_object = new stageTwoDecode();
+    // }
 
 
 
@@ -52,12 +65,7 @@ public class control{
         IR = "";
         for(int i = 0; i < 4; i++){
             int val = memory_object.loadByte(pc_value);
-            /* 
-                to get 00000001 instead of 1 we do toBinaryString(256 + val)
-                which give us 100000001 as current binary.
-                substring function return us the strarting from any index. 
-            */
-            String currentBinary = Integer.toBinaryString(256 + val);   
+            String currentBinary = Integer.toBinaryString(256 + val);
             String s = currentBinary.substring(currentBinary.length() - 8);
             IR = IR + s;
             pc_value++; 
@@ -84,45 +92,29 @@ public class control{
 
 
     static int decoder(){
-        System.out.println(IR);
-        ArrayList<Integer> rs1_rs2_rd_immidiate_n =  decoder_object.decode(IR);   
-        System.out.println(rs1_rs2_rd_immidiate_n);
-        int which_instruction = rs1_rs2_rd_immidiate_n.get(4);
-        
-
-        /*
-            as try block break where exception is made 
-            so wrote separetly;
-        */ 
+        int which_instruction=0;
         try{
+            // System.out.println(IR);
+            ArrayList<Integer> rs1_rs2_rd_immidiate_n =  decoder_object.decode(IR);   
+            which_instruction = rs1_rs2_rd_immidiate_n.get(4);
             ra = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(0));
-        }
-        catch(NullPointerException e ){
-            
-        }
-
-        try{
+            // System.out.println(rs1_rs2_rd_immidiate_n.get(1));
             rb = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(1));
-        }
-        catch(NullPointerException e ){
+            rd = rs1_rs2_rd_immidiate_n.get(2);
+            rm = rb;
+            immidiate = rs1_rs2_rd_immidiate_n.get(3);
+            String s = control_and_name_of_instruction.get_control_unit_values(which_instruction);
             
+            String[] c = s.split(" ");
+            char[] control_unit = c[1].toCharArray();
+            b_select = control_unit[0];
+            y_select = control_unit[1];
+            pc_select = control_unit[2];
+            inc_select = control_unit[3];
+            ma_select = control_unit[4];
+        }catch(Exception e){
+            // System.out.print("haha");
         }
-        
-        rd = rs1_rs2_rd_immidiate_n.get(2);
-        rm = rb;
-        immidiate = rs1_rs2_rd_immidiate_n.get(3);
-        
-        /* Control Unit to update all the values of mux */
-        String s = control_and_name_of_instruction.get_control_unit_values(which_instruction);
-        
-        String[] c = s.split(" ");
-        System.out.println(c[0]+" ");
-        char[] control_unit = c[1].toCharArray();
-        b_select = control_unit[0];
-        y_select = control_unit[1];
-        pc_select = control_unit[2];
-        inc_select = control_unit[3];
-        ma_select = control_unit[4];
 
         return which_instruction;
     }
@@ -230,17 +222,7 @@ public class control{
 
 
     public static void main(String args[]){
-        pc_value = 0;
-        IR = "";
-        register_file register_file_object = new register_file();
-        memory memory_object = new memory();
-        PC pc_object = new PC();
-        instructions instruction_object = new instructions(pc_object);  
-        number_to_instrucions_function control_and_name_of_instruction = new number_to_instrucions_function();
-        control_and_name_of_instruction.set_number_to_instrucions_function();
-        stageTwoDecode decoder_object = new stageTwoDecode();
-        
-        control obj = new control();
+        instruction_object = new instructions(pc_object);
         int address_c, address_b, address_a, rz, rm;
         BufferedReader file_reader;
         try{
@@ -249,7 +231,7 @@ public class control{
             
             while((line = file_reader.readLine()) !=null){
                 line = convert_machine_code_line_to_instruction(line);
-                System.out.print("line"+" "+line);
+                System.out.print(line+" ");
                 storing_in_memory(line);
             }
         }
@@ -259,15 +241,15 @@ public class control{
         System.out.println("Added to memory");
         
         
-        while(pc_value <= memory_object.code_start){
+        while(pc_value < memory_object.code_start){
+            // System.out.println(pc_value + " " + memory_object.code_start);
+            fetch();
             
-            obj.fetch();
+            int which_instruction = decoder();
             
-            int which_instruction = obj.decoder();
+            ALU(which_instruction);
             
-            obj.ALU(which_instruction);
-            
-            obj.memory_read_write();
+            memory_read_write();
         }
     }
 }
