@@ -4,6 +4,10 @@ import java.nio.*;
 import java.lang.Math;
 
 class number_to_instrucions_function{
+    /*
+        b_select, y_select, pc_select, inc_select, ma_select
+    */
+    
     static LinkedHashMap<Integer, String> integer_to_inst = new LinkedHashMap<Integer, String>();
     static void set_number_to_instrucions_function(){
         integer_to_inst.put(1, "add 00100");
@@ -11,11 +15,11 @@ class number_to_instrucions_function{
         integer_to_inst.put(3, "or 00100");
         integer_to_inst.put(4, "sll");
         integer_to_inst.put(5, "slt");
-        integer_to_inst.put(6,"sltu");
-        integer_to_inst.put(7,"sra");
-        integer_to_inst.put(8,"sub");
-        integer_to_inst.put(9,"xor");
-        integer_to_inst.put(10,"addi");
+        integer_to_inst.put(6, "sltu");
+        integer_to_inst.put(7, "sra");
+        integer_to_inst.put(8, "sub");
+        integer_to_inst.put(9, "xor");
+        integer_to_inst.put(10,"addi 10100");
         integer_to_inst.put(11,"andi");
         integer_to_inst.put(12,"jalr");
         integer_to_inst.put(13,"lb");
@@ -29,7 +33,7 @@ class number_to_instrucions_function{
         integer_to_inst.put(21,"sltiu");
         integer_to_inst.put(22,"srai");
         integer_to_inst.put(23,"srli");
-        integer_to_inst.put(24,"xori");
+        integer_to_inst.put(24,"xori 10100");
         integer_to_inst.put(25,"auipc");
         integer_to_inst.put(26,"lui");
         integer_to_inst.put(27,"sb");
@@ -43,9 +47,6 @@ class number_to_instrucions_function{
         integer_to_inst.put(35,"bltu");
         integer_to_inst.put(36,"jal");
     }
-    /*
-        b_select, y_select, pc_select, inc_select, ma_select
-    */
     
 
 
