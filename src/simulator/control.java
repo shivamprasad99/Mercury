@@ -4,7 +4,7 @@ import java.nio.*;
 import java.lang.Math;
 
 public class control{ 
-    static String IR;
+    static String IR = "";
     static int ra, rb, rd, rm, pc_value, immidiate;
     static boolean condition_signal_beq = false; // control unit must set these accordingly
     static boolean condition_signal_bge = false; // control unit must set these accordingly
@@ -20,8 +20,8 @@ public class control{
     static memory memory_object;
     static number_to_instrucions_function control_and_name_of_instruction;
     static PC pc_object;
-    int line_no;
-
+    static int line_no;
+    static stageTwoDecode decoder_object; 
 
 
     control(){
@@ -33,6 +33,7 @@ public class control{
         instructions instruction_object = new instructions(pc_object);  
         number_to_instrucions_function control_and_name_of_instruction = new number_to_instrucions_function();
         control_and_name_of_instruction.set_number_to_instrucions_function();
+        stageTwoDecode decoder_object = new stageTwoDecode();
     }
 
 
@@ -58,26 +59,18 @@ public class control{
     }
 
 
-    static String convert_int_to_string(int value){
-        String s = "";
-        while(value!=0){
-            int temp = value % 2;
-            value /= 2; 
-            s = (char)(temp+48) + s;
-        }
-        return s;
-    }
 
 
     static void fetch(){
-        
+        IR = "";
         for(int i = 0; i < 4; i++){
             int val = memory_object.loadByte(pc_value);
-            IR = IR + convert_int_to_string(val);
+            String currentBinary = Integer.toBinaryString(256 + val);
+            String s = currentBinary.substring(currentBinary.length() - 8);
+            IR = IR + s;
             pc_value++; 
         }
-        System.out.println(IR);
-
+       
     }
 
     static void change_conditional_signal(int which_instruction){
@@ -99,21 +92,18 @@ public class control{
 
 
     static int decoder(){
-        List<Integer> opcode_func3_func7_rs1_rs2_rd_immidiate_n = new ArrayList<Integer>();
-
-        /*
-            opcode_func3_func7_rs1_rs2_rd_immidiate_n = decode();    
-        */ 
-        
-        int which_instruction = opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(7);
-        ra = register_file_object.load_from_register(opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(3));
-        rb = register_file_object.load_from_register(opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(4));
-        rd = opcode_func3_func7_rs1_rs2_rd_immidiate_n.get(5);
+        System.out.println(IR);
+        ArrayList<Integer> rs1_rs2_rd_immidiate_n =  decoder_object.decode(IR);   
+        int which_instruction = rs1_rs2_rd_immidiate_n.get(4);
+        ra = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(0));
+        rb = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(1));
+        rd = rs1_rs2_rd_immidiate_n.get(2);
         rm = rb;
-        immidiate = opcode_func3_func7_rs1_rs2_rd_immidiate_n(6);
+        immidiate = rs1_rs2_rd_immidiate_n.get(3);
         
         /* Control Unit to update all the values of mux */
         String s = control_and_name_of_instruction.get_control_unit_values(which_instruction);
+        
         String[] c = s.split(" ");
         char[] control_unit = c[1].toCharArray();
         b_select = control_unit[0];
@@ -130,7 +120,7 @@ public class control{
         kept ry and rz as string and if function return intger convert it to String.
     */
     static void ALU(int which_instruction){
-        switch(muxB) {
+        switch(b_select) {
             case 0: muxB = rb; break;
             case 1: muxB = immidiate; break;
         }
@@ -219,14 +209,16 @@ public class control{
                     current_no = 1;
                 out += current_no * Math.pow(2, (8*i+7) - j);
             }
+            System.out.print(out+" ");
             memory_object.storeByte(out);
         }
+        System.out.println();
     }
 
 
 
     public static void main(String args[]){
-        
+        control obj = new control();
         int address_c, address_b, address_a, rz, rm;
         BufferedReader file_reader;
         try{
@@ -234,7 +226,8 @@ public class control{
             String line = "";
             
             while((line = file_reader.readLine()) !=null){
-                line = convert_machine_code_line_to_instruction(line, line_no);
+                line = convert_machine_code_line_to_instruction(line);
+                System.out.print(line+" ");
                 storing_in_memory(line);
             }
         }
@@ -246,13 +239,13 @@ public class control{
         
         while(pc_value <= memory_object.code_start){
             
-            fetch();
+            obj.fetch();
             
-            int which_instruction = decoder();
+            int which_instruction = obj.decoder();
             
-            ALU(which_instruction);
+            obj.ALU(which_instruction);
             
-            memory_read_write();
+            obj.memory_read_write();
         }
     }
 }

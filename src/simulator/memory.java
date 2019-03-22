@@ -5,7 +5,7 @@ import java.lang.Math;
 
 public class memory {
 
-    static protected LinkedHashMap<Integer, Byte> memory_linked_hash_map = new LinkedHashMap<Integer, Byte>();
+    static LinkedHashMap<Integer, Byte> memory_linked_hash_map = new LinkedHashMap<Integer, Byte>();
     static int code_start = 0x0;
     static int data_start = 0xffffffff;
     static int stack_start= 0x7ffffffc;
@@ -99,9 +99,9 @@ public class memory {
     public static int loadWord(int address){
         byte[] bt = new byte[4];
         bt[0] = memory_linked_hash_map.get(address);
-        bt[1] = memory_linked_hash_map.get(address);
-        bt[2] = memory_linked_hash_map.get(address);
-        bt[3] = memory_linked_hash_map.get(address);
+        bt[1] = memory_linked_hash_map.get(address+1);
+        bt[2] = memory_linked_hash_map.get(address+2);
+        bt[3] = memory_linked_hash_map.get(address+3);
         int removing_negative[] = new int[4];
         for(int i = 0; i < 4; i++){
             removing_negative[i] = bt[i] & 0xff;
