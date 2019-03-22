@@ -1,14 +1,19 @@
+import java.io.*;
+import java.util.*;
+import java.nio.*;
+import java.lang.Math;
+
 class number_to_instrucions_function{
-    public static void main(String args[]){
-        LinkedHashMap<String, Interger> instruction_to_integer = new LinkedHashMap<String, Interger>();
-        
-        /*
-            name, number_specified, MuxB, MuxY, MuxMa, MuxPC, MuxINC
-        */
-        
-        instruction_to_integer.put(1, "add ");
-        instruction_to_integer.put(2, "and");
-        instruction_to_integer.put(3, "or");
+    
+    /*
+        b_select, y_select, pc_select, inc_select, ma_select
+    */
+    LinkedHashMap<String, Interger> instruction_to_integer = new LinkedHashMap<String, Interger>();
+    
+    number_to_instrucions_function(){
+        instruction_to_integer.put(1, "add 00100");
+        instruction_to_integer.put(2, "and 00100");
+        instruction_to_integer.put(3, "or 00100");
         instruction_to_integer.put(4, "sll");
         instruction_to_integer.put(5, "slt");
         instruction_to_integer.put(6,"sltu");
@@ -43,4 +48,12 @@ class number_to_instrucions_function{
         instruction_to_integer.put(35,"bltu");
         instruction_to_integer.put(36,"jal");
     }
+
+
+    static String get_control_unit_values(int which_instrucion){
+        return instruction_to_integer.get(which_instrucion);
+    }
+    
+
+    
 }
