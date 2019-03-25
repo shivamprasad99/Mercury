@@ -13,7 +13,7 @@ class number_to_instrucions_function{
         integer_to_inst.put(1, "add 00100");
         integer_to_inst.put(2, "and 00100");
         integer_to_inst.put(3, "or 00100");
-        integer_to_inst.put(4, "sll");
+        integer_to_inst.put(4, "sll ");
         integer_to_inst.put(5, "slt");
         integer_to_inst.put(6, "sltu");
         integer_to_inst.put(7, "sra");

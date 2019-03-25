@@ -5,7 +5,7 @@ import java.lang.Math;
 
 public class control{ 
     static String IR = "";
-    static int ra, rb, rd, rm, pc_value = 0, immidiate;
+    static int ra, rb, rd, rm, pc_value = 0, immidiate, pc_temp;
     static boolean condition_signal_beq = false; // control unit must set these accordingly
     static boolean condition_signal_bge = false; // control unit must set these accordingly
     static boolean condition_signal_bgeu = false; // control unit must set these accordingly
@@ -39,6 +39,7 @@ public class control{
 
 
     // seperate line_no and machine code.
+    
     static String convert_machine_code_line_to_instruction(String line){
         char[] char_line = line.toCharArray();  // convert String to char_array
         line_no = (int)(char_line[0]) - 48;     // getting line_no
@@ -57,6 +58,12 @@ public class control{
         line = new String(instruction_for_decoder);     // convert charArray to String
         return line;
     }
+
+    // static String convert_machine_code_line_to_instruction(String line){
+    //     String[] s = line.split(" ");
+    //     line_no = Integer.valueOf(s[0]);
+    //     return s[1];
+    // }
 
 
 
@@ -93,18 +100,27 @@ public class control{
 
     static int decoder(){
         int which_instruction=0;
+        
+        // System.out.println(IR);
+        ArrayList<Integer> rs1_rs2_rd_immidiate_n =  decoder_object.decode(IR);   
+        which_instruction = rs1_rs2_rd_immidiate_n.get(4);
+        System.out.println(rs1_rs2_rd_immidiate_n);
+        // System.out.println(rs1_rs2_rd_immidiate_n.get(1));
+        
         try{
-            // System.out.println(IR);
-            ArrayList<Integer> rs1_rs2_rd_immidiate_n =  decoder_object.decode(IR);   
-            which_instruction = rs1_rs2_rd_immidiate_n.get(4);
             ra = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(0));
-            // System.out.println(rs1_rs2_rd_immidiate_n.get(1));
+        }catch(Exception e){}
+
+        try{
             rb = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(1));
-            rd = rs1_rs2_rd_immidiate_n.get(2);
-            rm = rb;
-            immidiate = rs1_rs2_rd_immidiate_n.get(3);
+        }catch(Exception e){}
+    
+        
+        rd = rs1_rs2_rd_immidiate_n.get(2);
+        rm = rb;
+        immidiate = rs1_rs2_rd_immidiate_n.get(3);
+        try{
             String s = control_and_name_of_instruction.get_control_unit_values(which_instruction);
-            
             String[] c = s.split(" ");
             char[] control_unit = c[1].toCharArray();
             b_select = control_unit[0];
@@ -113,8 +129,13 @@ public class control{
             inc_select = control_unit[3];
             ma_select = control_unit[4];
         }catch(Exception e){
-            // System.out.print("haha");
+            System.out.println("wrong instruction");
         }
+
+        
+        
+        // System.out.println(ra + " "+rb+ " "+rd+ " "+immidiate);
+        
 
         return which_instruction;
     }
@@ -165,7 +186,7 @@ public class control{
         }
         else if(which_instruction == 12){
             int ry;
-            ry = instruction_object.jalr(ra, muxB, pc_value);
+            pc_temp = instruction_object.jalr(ra, muxB, pc_value);
         }
         // where is srl in which_instruction
         else if(which_instruction == 23){
@@ -193,11 +214,15 @@ public class control{
         if(muxY == 0)
             ry = rz;
         else if(muxY == 1){
-            // rz = memory_object.load_from_memory(address);
+            ry = memory_object.loadWord(rz);
         }
         else if(muxY == 2){
-
+            ry = pc_temp;
         }
+    }
+
+    static void writeBack(){
+        register_file_object.store_in_register(rd, ry);
     }
 
 
@@ -224,12 +249,15 @@ public class control{
     public static void main(String args[]){
         instruction_object = new instructions(pc_object);
         int address_c, address_b, address_a, rz, rm;
+        control_and_name_of_instruction.set_number_to_instrucions_function();
         BufferedReader file_reader;
         try{
             file_reader = new BufferedReader(new FileReader("./test"));    
             String line = "";
             
             while((line = file_reader.readLine()) !=null){
+                if(line.length() == 0)
+                    continue;
                 line = convert_machine_code_line_to_instruction(line);
                 System.out.print(line+" ");
                 storing_in_memory(line);
@@ -250,6 +278,8 @@ public class control{
             ALU(which_instruction);
             
             memory_read_write();
+
+            writeBack();
         }
     }
 }

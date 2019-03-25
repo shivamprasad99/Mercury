@@ -49,15 +49,20 @@ public class stageTwoDecode{
 			return foo;
 		}
 		public static int getIm(String insType, String inst){
-			if(insType == "I"){
-					String strRs1 = inst.substring(0, 11);
+            System.out.println(insType);
+			if(insType.equals("I")){
+					String strRs1 = inst.substring(0, 12);
 					int foo = Integer.parseInt(strRs1, 2);
 					return foo;
-			}else if(insType == "U" || insType == "J"){
+			}else if(insType.equals("R")){
+					String strRs1 = inst.substring(0, 12);
+					int foo = Integer.parseInt(strRs1, 2);
+					return foo;
+            }else if(insType.equals("UJ") || insType.equals("J")){
 				String strRs1 = inst.substring(0, 20);
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;
-			}else if(insType == "S" || insType == "B"){
+			}else if(insType.equals("S") || insType.equals("SB")){
 				String strRs1 = inst.substring(0, 7)+inst.substring(17, 22);
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;

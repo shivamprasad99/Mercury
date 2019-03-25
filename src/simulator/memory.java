@@ -83,6 +83,12 @@ public class memory {
 
 
     public static int loadByte(int address){
+        
+        if(address < 0x0 && address >= 0xffffffff){
+            System.out.println("Memory Out of bound");
+            System.exit(0);
+        }
+        
         byte bt = memory_linked_hash_map.get(address);
         int output = bt & 0xff;
         String hex = Integer.toHexString(output);
@@ -97,6 +103,12 @@ public class memory {
     }
 
     public static int loadWord(int address){
+        
+        if(address < 0x0 && address >= 0xffffffff){
+            System.out.println("Memory Out of bound");
+            System.exit(0);
+        }
+        
         byte[] bt = new byte[4];
         bt[0] = memory_linked_hash_map.get(address);
         bt[1] = memory_linked_hash_map.get(address+1);
