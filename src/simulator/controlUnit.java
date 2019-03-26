@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+package simulator;
+>>>>>>> 8f3583b2967e3d40466fd60fef445a5c435347bb
 
 public class controlUnit{
 
