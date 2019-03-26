@@ -121,7 +121,7 @@ public class stageTwoDecode{
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;
 			}else if(insType.equals("S")){
-				String strRs1 = inst.substring(0, 7)+inst.substring(17, 22);
+				String strRs1 = inst.substring(0, 7)+inst.substring(19, 24);
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;
 			}else if(insType.equals("SB")){
