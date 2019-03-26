@@ -22,6 +22,8 @@ public class control{
     static PC pc_object = new PC();
     static int line_no;
     static stageTwoDecode decoder_object = new stageTwoDecode(); 
+    static int which_instruction;
+    static controlUnit = new controlUnit();
 
 
     // control(){
@@ -66,8 +68,6 @@ public class control{
     // }
 
 
-
-
     static void fetch(){
         IR = "";
         for(int i = 0; i < 4; i++){
@@ -101,12 +101,14 @@ public class control{
     static int decoder(){
         int which_instruction=0;
         
-        // System.out.println(IR);
         ArrayList<Integer> rs1_rs2_rd_immidiate_n =  decoder_object.decode(IR);   
-        which_instruction = rs1_rs2_rd_immidiate_n.get(4);
         System.out.println(rs1_rs2_rd_immidiate_n);
         // System.out.println(rs1_rs2_rd_immidiate_n.get(1));
         
+        try{
+        which_instruction = rs1_rs2_rd_immidiate_n.get(4);
+        }catch(Exception e){}
+
         try{
             ra = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(0));
         }catch(Exception e){}
@@ -115,10 +117,14 @@ public class control{
             rb = register_file_object.load_from_register(rs1_rs2_rd_immidiate_n.get(1));
         }catch(Exception e){}
     
-        
-        rd = rs1_rs2_rd_immidiate_n.get(2);
+        try{
+            rd = rs1_rs2_rd_immidiate_n.get(2);
+        }catch(Exception e){}
         rm = rb;
-        immidiate = rs1_rs2_rd_immidiate_n.get(3);
+        try{
+            immidiate = rs1_rs2_rd_immidiate_n.get(3);
+        }catch(Exception e){}
+    
         try{
             String s = control_and_name_of_instruction.get_control_unit_values(which_instruction);
             String[] c = s.split(" ");
@@ -144,7 +150,7 @@ public class control{
     /*
         kept ry and rz as string and if function return intger convert it to String.
     */
-    static void ALU(int which_instruction){
+    static void ALU(){
         switch(b_select) {
             case 0: muxB = rb; break;
             case 1: muxB = immidiate; break;
@@ -207,16 +213,22 @@ public class control{
                 pc_value  = pc_value + muxB;
             }
         }
+        else if(which_instruction == 14){
+            rz = instruction_object.lw(ra, muxB);
+        }
+        else if(which_instruction == )
     }
 
     static void memory_read_write(){
         // get value of muxY
-        if(muxY == 0)
+
+
+        if(b_select == 0)
             ry = rz;
-        else if(muxY == 1){
+        else if(b_select == 1){
             ry = memory_object.loadWord(rz);
         }
-        else if(muxY == 2){
+        else if(b_select == 2){
             ry = pc_temp;
         }
     }
@@ -251,6 +263,8 @@ public class control{
         int address_c, address_b, address_a, rz, rm;
         control_and_name_of_instruction.set_number_to_instrucions_function();
         BufferedReader file_reader;
+        
+        
         try{
             file_reader = new BufferedReader(new FileReader("./test"));    
             String line = "";
@@ -268,14 +282,15 @@ public class control{
         }
         System.out.println("Added to memory");
         
-        
+
+
         while(pc_value < memory_object.code_start){
             // System.out.println(pc_value + " " + memory_object.code_start);
             fetch();
             
-            int which_instruction = decoder();
+            which_instruction = decoder();
             
-            ALU(which_instruction);
+            ALU();
             
             memory_read_write();
 

@@ -23,7 +23,7 @@ class number_to_instrucions_function{
         integer_to_inst.put(11,"andi");
         integer_to_inst.put(12,"jalr");
         integer_to_inst.put(13,"lb");
-        integer_to_inst.put(14,"lw");
+        integer_to_inst.put(14,"lw 11100");
         integer_to_inst.put(15,"lh");
         integer_to_inst.put(16,"lhu");
         integer_to_inst.put(17,"lbu");
@@ -38,7 +38,7 @@ class number_to_instrucions_function{
         integer_to_inst.put(26,"lui");
         integer_to_inst.put(27,"sb");
         integer_to_inst.put(28,"sh");
-        integer_to_inst.put(29,"sw");
+        integer_to_inst.put(29,"sw 11100");
         integer_to_inst.put(30,"beq");
         integer_to_inst.put(31,"bge");
         integer_to_inst.put(32,"bgeu");

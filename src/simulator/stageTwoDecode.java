@@ -244,7 +244,8 @@ public class stageTwoDecode{
 						// return retVal;
 					}
 			}catch(Exception e){
-				System.out.println(e);
+				System.out.println("Wrong instruction");
+				System.exit(0);
 			}
 			// System.out.println("Size = "+retVal.get(4));
 			instructionType = "";

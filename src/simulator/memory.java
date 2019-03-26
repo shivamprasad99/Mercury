@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.nio.*;
 import java.lang.Math;
+import java.lang.*;
 
 public class memory {
 
@@ -33,7 +34,15 @@ public class memory {
         stack_start = stack_start + how_much;
     }
 
-    
+    public static void storeDataByte(int value){
+        checker();
+        int a2 = 0xff;
+        value = value & a2;
+        byte b = (byte)(a2 & value);
+        memory_linked_hash_map.put(data_start, b);    
+        data_start += 1;
+    }
+
     public static void storeByte(int value){
         checker();
         int a2 = 0xff;
@@ -45,6 +54,9 @@ public class memory {
 
     static byte[] toByte(int i){
         byte[] word = new  byte[4];
+        for(int j = 0; j < 4; j++){
+            word[j] = 0;
+        }
         word[3] = (byte)(i>>24);
         word[2] = (byte)(i>>16);
         word[1] = (byte)(i>>8);
@@ -57,7 +69,6 @@ public class memory {
         int sum = 0;
         for(int t = 0; t < 4; t++){
             String[] arr = hex[t].split("");
-            System.out.println(hex[t]+" ");
             for(int i = 0; i < hex[t].length(); i++){
                 int temp = (int) Math.pow(16, i+sum);
                 int val = Integer.parseInt(arr[  hex[t].length() - i - 1  ], 16);
@@ -69,6 +80,18 @@ public class memory {
         return a;
     }
     
+    storeDataWord(int value){
+        byte[] bt = toByte(value);
+        storeByte(bt[0]);
+        data_start++;
+        storeByte(bt[1]);
+        data_start++;
+        storeByte(bt[2]);
+        data_start++;
+        storeByte(bt[3]);
+        data_start++;
+    }
+
     public static void storeWord(int value){
         byte[] bt = toByte(value);
         storeByte(bt[0]);
@@ -88,8 +111,9 @@ public class memory {
             System.out.println("Memory Out of bound");
             System.exit(0);
         }
-        
-        byte bt = memory_linked_hash_map.get(address);
+        byte bt = 0;
+        if(memory_linked_hash_map.get(address) != null)
+            bt = memory_linked_hash_map.get(address);
         int output = bt & 0xff;
         String hex = Integer.toHexString(output);
         String[] arr = hex.split(""); 
@@ -102,18 +126,30 @@ public class memory {
         return a;    
     }
 
+
+
     public static int loadWord(int address){
         
+        
+
         if(address < 0x0 && address >= 0xffffffff){
             System.out.println("Memory Out of bound");
             System.exit(0);
         }
-        
+        if(address > code_start){
+            return 0;
+        }
+
         byte[] bt = new byte[4];
-        bt[0] = memory_linked_hash_map.get(address);
-        bt[1] = memory_linked_hash_map.get(address+1);
-        bt[2] = memory_linked_hash_map.get(address+2);
-        bt[3] = memory_linked_hash_map.get(address+3);
+        
+        for(int i = 0 ; i < 4; i++){
+            if(memory_linked_hash_map.get(address+i) != null)
+                bt[i] = memory_linked_hash_map.get(address+i);
+        
+        }
+        
+
+
         int removing_negative[] = new int[4];
         for(int i = 0; i < 4; i++){
             removing_negative[i] = bt[i] & 0xff;

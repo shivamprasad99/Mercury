@@ -54,4 +54,7 @@ class instructions{
     public static int wide_immediate_addition(int ra, int rb) {
         return ra+(rb<<12);
     }
+    public static void lw(int ra, int rb){
+        return ra+rb;
+    }
 }
