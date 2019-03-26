@@ -54,6 +54,10 @@ public class controlUnit{
 
         if(whichInstruction==12) pcSelect=0; // for using return address
 
+        if(whichInstruction==36||whichInstruction==12){         //mux inc to immediate for unconditional values
+            incSelect=1;
+        }
+
     }
 
     void setMuxInc(int flag){
@@ -61,10 +65,7 @@ public class controlUnit{
             if(flag==1) incSelect=1;
             else  incSelect=0;
         }
-        if(whichInstruction==36||whichInstruction==12){         //mux inc to immediate for unconditional values
-            incSelect=1;
-        }
-
+        
     }
 
 
