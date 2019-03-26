@@ -51,6 +51,57 @@ public class stageTwoDecode{
 			int foo = Integer.parseInt(strRs1, 2);
 			return foo;
 		}
+
+		static String addBinary(String a, String b) 
+		{ 
+			
+			// Initialize result 
+			String result = "";  
+			
+			// Initialize digit sum 
+			int s = 0;          
+	
+			// Travers both strings starting  
+			// from last characters 
+			int i = a.length() - 1, j = b.length() - 1; 
+			while (i >= 0 || j >= 0 || s == 1) 
+			{ 
+				
+				// Comput sum of last  
+				// digits and carry 
+				s += ((i >= 0)? a.charAt(i) - '0': 0); 
+				s += ((j >= 0)? b.charAt(j) - '0': 0); 
+	
+				// If current digit sum is  
+				// 1 or 3, add 1 to result 
+				result = (char)(s % 2 + '0') + result; 
+	
+				// Compute carry 
+				s /= 2; 
+	
+				// Move to next digits 
+				i--; j--; 
+			} 
+			
+		return result; 
+		}
+
+		public static int binaryToSigned(String bs){
+			if(bs.charAt(0)=='0')
+				return Integer.parseInt(bs);
+			else{
+				String sum = addBinary(bs,"1");
+				StringBuffer sb = new StringBuffer();
+				for(int i=0;i<sum.length();i++){
+					if(sum.charAt(i)=='0')
+						sb.append('1');
+					else
+					sb.append('0');
+				}
+				return -1*Integer.parseInt(sb.toString());
+			}
+		}
+
 		public static int getIm(String insType, String inst){
             System.out.println(insType);
 			if(insType.equals("I")){
@@ -62,19 +113,19 @@ public class stageTwoDecode{
 					int foo = Integer.parseInt(strRs1, 2);
 					return foo;
             }else if(insType.equals("UJ")){
-				String strRs1 = inst.charAt(0) + inst.substr(12,20) + inst.charAt(11) + inst.substr(1,11);
+				String strRs1 = inst.charAt(0) + inst.substring(12,20) + inst.charAt(11) + inst.substring(1,11);
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;
 			}else if(insType.equals("U")){
 				String strRs1 = inst.substring(0, 20);
 				int foo = Integer.parseInt(strRs1, 2);
-				return foo;2
+				return foo;
 			}else if(insType.equals("S")){
 				String strRs1 = inst.substring(0, 7)+inst.substring(17, 22);
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;
 			}else if(insType.equals("SB")){
-				String strRs1 = inst.charAt(0) + inst.charAt(24) + inst.substr(1,7) + inst.substr(20,24);
+				String strRs1 = inst.charAt(0) + inst.charAt(24) + inst.substring(1,7) + inst.substring(20,24);
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;
 			}
