@@ -13,12 +13,6 @@ class instructions{
     public static int and(int ra, int rb){
         return ra + rb;
     }
-    public static void jalr(int ra, int offset, int pc_value){
-        pc_value = pc_object.adder(pc_value);
-    }
-    public static void jal(int ra, int offset, int pc_value){
-        pc_value = pc_object.adder(pc_value);
-    }
     public static int addi(int ra, int rb){
         return ra+rb;
     }
@@ -54,6 +48,9 @@ class instructions{
         return ra+(rb<<12);
     }
     public static int lw(int ra, int rb){
+        return ra+rb;
+    }
+    public static int sw(int ra, int rb){
         return ra+rb;
     }
 }

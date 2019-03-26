@@ -17,6 +17,7 @@ class PC {
         return pc_temp;
     }
     public static int adder(int pc_value){
+        System.out.println("PC "+pc_value +" "+ muxPc +" "+ muxInc);
         pc_temp = pc_value;
         pc_value = muxPc;
         pc_value = pc_value+muxInc;

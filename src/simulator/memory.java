@@ -9,7 +9,7 @@ public class memory {
     static LinkedHashMap<Integer, Byte> memory_linked_hash_map = new LinkedHashMap<Integer, Byte>();
     static int code_start = 0x0;
     static int data_start = 0xffffffff;
-    static int stack_start= 0x7ffffffc;
+    public static int stack_start= 0x7afffffc;
 
     public static void checker(){
         if(code_start < 0x0 && code_start >= 0xffffffff){
@@ -23,15 +23,12 @@ public class memory {
     }
 
     public static void storeDataByte(int value, int address){
-        checker();
         int a2 = 0xff;
-        value = value & a2;
         byte b = (byte)(a2 & value);
         memory_linked_hash_map.put(address, b);    
     }
 
     public static void storeByte(int value){
-        checker();
         int a2 = 0xff;
         value = value & a2;
         byte b = (byte)(a2 & value);
@@ -68,15 +65,17 @@ public class memory {
     }
     
     static void storeDataWord(int value, int address){
+        System.out.println("Storing value "+value + " " + address);
         byte[] bt = toByte(value);
-        storeByte(bt[0]);
+        storeDataByte(bt[0], address);
         address++;
-        storeByte(bt[1]);
+        storeDataByte(bt[1], address);
         address++;
-        storeByte(bt[2]);
+        storeDataByte(bt[2], address);
         address++;
-        storeByte(bt[3]);
+        storeDataByte(bt[3], address);
         address++;
+        System.out.println(bt[0] + " " + bt[1] + " " + bt[2] + " "+ bt[3]);
     }
 
     public static void storeWord(int value){
@@ -90,7 +89,6 @@ public class memory {
         storeByte(bt[3]);
         code_start++;
     }
-
 
     public static int loadByte(int address){
         
@@ -116,23 +114,18 @@ public class memory {
 
 
     public static int loadWord(int address){
-        
-        
-
         if(address < 0x0 && address >= 0xffffffff){
             System.out.println("Memory Out of bound");
             System.exit(0);
-        }
-        if(address > code_start){
-            return 0;
         }
 
         byte[] bt = new byte[4];
         
         for(int i = 0 ; i < 4; i++){
-            if(memory_linked_hash_map.get(address+i) != null)
+            if(memory_linked_hash_map.get(address+i) != null){
                 bt[i] = memory_linked_hash_map.get(address+i);
-        
+                System.out.println("bt "+bt[i]);
+            }
         }
         
 

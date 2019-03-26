@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+import java.io.*;
+import java.util.*;
+
 class Data{
     Data(){}
     Data(String op,String f7,String f3){
@@ -34,12 +37,12 @@ public class stageTwoDecode{
 		}
 
 		public static int getRs1(String inst){
-			String strRs1 = inst.substring(7, 12);
+			String strRs1 = inst.substring(12,17);
 			int foo = Integer.parseInt(strRs1, 2);
 			return foo;
 		}
 		public static int getRs2(String inst){
-			String strRs1 = inst.substring(12, 17);
+			String strRs1 = inst.substring(7,12);
 			int foo = Integer.parseInt(strRs1, 2);
 			return foo;
 		}
@@ -48,23 +51,83 @@ public class stageTwoDecode{
 			int foo = Integer.parseInt(strRs1, 2);
 			return foo;
 		}
+
+		static String addBinary(String a, String b) 
+		{ 
+			
+			// Initialize result 
+			String result = "";  
+			
+			// Initialize digit sum 
+			int s = 0;          
+	
+			// Travers both strings starting  
+			// from last characters 
+			int i = a.length() - 1, j = b.length() - 1; 
+			while (i >= 0 || j >= 0 || s == 1) 
+			{ 
+				
+				// Comput sum of last  
+				// digits and carry 
+				s += ((i >= 0)? a.charAt(i) - '0': 0); 
+				s += ((j >= 0)? b.charAt(j) - '0': 0); 
+	
+				// If current digit sum is  
+				// 1 or 3, add 1 to result 
+				result = (char)(s % 2 + '0') + result; 
+	
+				// Compute carry 
+				s /= 2; 
+	
+				// Move to next digits 
+				i--; j--; 
+			} 
+			
+		return result; 
+		}
+
+		public static int binaryToSigned(String bs){
+			System.out.println("INSIDE");
+			if(bs.charAt(0)=='0')
+				return Integer.parseInt(bs, 2);
+			else{
+				StringBuffer sb = new StringBuffer();
+				for(int i=0;i<bs.length();i++){
+					if(bs.charAt(i)=='0')
+						sb.append('1');
+					else
+						sb.append('0');
+				}
+				String sum = addBinary(sb.toString(),"1");
+				return -1*Integer.parseInt(sum, 2);
+			}
+		}
+
 		public static int getIm(String insType, String inst){
             System.out.println(insType);
 			if(insType.equals("I")){
 					String strRs1 = inst.substring(0, 12);
-					int foo = Integer.parseInt(strRs1, 2);
+					int foo = binaryToSigned(strRs1);	// check fo r signed
 					return foo;
-			}else if(insType.equals("R")){
+			}else if(insType.equals("R")){	// dont care
 					String strRs1 = inst.substring(0, 12);
-					int foo = Integer.parseInt(strRs1, 2);
+					int foo = binaryToSigned(strRs1);
 					return foo;
-            }else if(insType.equals("UJ") || insType.equals("J")){
+            }else if(insType.equals("UJ")){
+				String strRs1 = inst.charAt(0) + inst.substring(12,20) + inst.charAt(11) + inst.substring(1,11);
+				int foo = binaryToSigned(strRs1);
+				return foo;
+			}else if(insType.equals("U")){
 				String strRs1 = inst.substring(0, 20);
 				int foo = Integer.parseInt(strRs1, 2);
 				return foo;
-			}else if(insType.equals("S") || insType.equals("SB")){
-				String strRs1 = inst.substring(0, 7)+inst.substring(17, 22);
-				int foo = Integer.parseInt(strRs1, 2);
+			}else if(insType.equals("S")){
+				String strRs1 = inst.substring(0, 7)+inst.substring(19, 24);
+				int foo = binaryToSigned(strRs1);
+				return foo;
+			}else if(insType.equals("SB")){
+				String strRs1 = inst.charAt(0) + inst.charAt(24) + inst.substring(1,7) + inst.substring(20,24);
+				int foo = binaryToSigned(strRs1);
 				return foo;
 			}
 			return -1; // wrong input

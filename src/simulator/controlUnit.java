@@ -1,3 +1,5 @@
+
+
 public class controlUnit{
 
     //each of these functions need to be run before any action for that stage.
@@ -5,7 +7,7 @@ public class controlUnit{
 
     private int whichInstruction; //the instruction number
 
-    protected int stageCounter;
+//    protected int stageCounter;
 
         //control signals for data Path
 
@@ -27,12 +29,14 @@ public class controlUnit{
 //    }
 
     void stage1(){
-        pcSelect=1;
+        irEnable=1;
         maSelect=1;     //address is to be sent from PC through muxMA
         incSelect=0;    //to add 4 to pc
+        pcSelect=1;     // to choose pc in muxPC
     }
 
     void stage2(){
+        irEnable=0;
         pcSelect=0;
     }
 
@@ -45,16 +49,12 @@ public class controlUnit{
             bSelect=0;      //0 for rb
         else bSelect=1;     //1 for immediate
 
-        if(whichInstruction<12||(whichInstruction>17&&whichInstruction<24)) ySelect=0;      //0 for rz
-        else if(whichInstruction==12||whichInstruction==36) ySelect =2; //2 for return address
-        else ySelect=1; //1 for loading ry from memory , no effect for branching instructions
 
         if(whichInstruction==12) pcSelect=0; // for using return address
 
         if(whichInstruction==36||whichInstruction==12){         //mux inc to immediate for unconditional values
             incSelect=1;
         }
-
     }
 
     void setMuxInc(int flag){
@@ -67,6 +67,10 @@ public class controlUnit{
 
 
     void stage4(){
+        if(whichInstruction<12||(whichInstruction>17&&whichInstruction<24)) ySelect=0;      //0 for rz
+        else if(whichInstruction==12||whichInstruction==36) ySelect =2; //2 for return address
+        else ySelect=1; //1 for loading ry from memory , no effect for branching instructions
+
         maSelect=0;     //address is to be sent from Rz through muxMa
     }
 
@@ -80,4 +84,3 @@ public class controlUnit{
 
 
 }
-

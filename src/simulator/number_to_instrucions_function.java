@@ -57,3 +57,20 @@ class number_to_instrucions_function{
 
     
 }
+/*
+    static void change_conditional_signal(int which_instruction){
+        switch(which_instruction){
+            case 30: condition_signal_beq = true;
+                break;
+            case 31: condition_signal_bge = true;
+                break;
+            case 32: condition_signal_bgeu = true;
+                break;
+            case 33: condition_signal_blt = true;
+                break;
+            case 34: condition_signal_bne = true;
+                break;
+            case 35: condition_signal_bltu = true;
+        }
+    }
+*/
