@@ -21,26 +21,13 @@ public class memory {
             System.exit(0);
         }
     }
-    public static void increment_code_start(int how_much){
-        checker();
-        code_start = code_start + how_much;
-    }
-    public static void increment_data_start(int how_much){
-        checker();
-        data_start = data_start + how_much;
-    }
-    public static void increment_stack_start(int how_much){
-        checker();
-        stack_start = stack_start + how_much;
-    }
 
-    public static void storeDataByte(int value){
+    public static void storeDataByte(int value, int address){
         checker();
         int a2 = 0xff;
         value = value & a2;
         byte b = (byte)(a2 & value);
-        memory_linked_hash_map.put(data_start, b);    
-        data_start += 1;
+        memory_linked_hash_map.put(address, b);    
     }
 
     public static void storeByte(int value){
@@ -80,16 +67,16 @@ public class memory {
         return a;
     }
     
-    storeDataWord(int value){
+    static void storeDataWord(int value, int address){
         byte[] bt = toByte(value);
         storeByte(bt[0]);
-        data_start++;
+        address++;
         storeByte(bt[1]);
-        data_start++;
+        address++;
         storeByte(bt[2]);
-        data_start++;
+        address++;
         storeByte(bt[3]);
-        data_start++;
+        address++;
     }
 
     public static void storeWord(int value){

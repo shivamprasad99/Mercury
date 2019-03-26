@@ -13,12 +13,11 @@ class instructions{
     public static int and(int ra, int rb){
         return ra + rb;
     }
-    public static int jalr(int ra, int offset, int pc_value){
-        pc_object.set_muxInc(offset);
-        pc_object.set_muxPc(ra);
-        pc_value = pc_object.adder();
-        int pc_temp = pc_object.get_pc_temp();
-        return pc_temp;
+    public static void jalr(int ra, int offset, int pc_value){
+        pc_value = pc_object.adder(pc_value);
+    }
+    public static void jal(int ra, int offset, int pc_value){
+        pc_value = pc_object.adder(pc_value);
     }
     public static int addi(int ra, int rb){
         return ra+rb;
@@ -54,7 +53,7 @@ class instructions{
     public static int wide_immediate_addition(int ra, int rb) {
         return ra+(rb<<12);
     }
-    public static void lw(int ra, int rb){
+    public static int lw(int ra, int rb){
         return ra+rb;
     }
 }

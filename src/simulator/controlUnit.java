@@ -1,5 +1,3 @@
-package simulator;
-
 public class controlUnit{
 
     //each of these functions need to be run before any action for that stage.
@@ -32,7 +30,6 @@ public class controlUnit{
         pcSelect=1;
         maSelect=1;     //address is to be sent from PC through muxMA
         incSelect=0;    //to add 4 to pc
-        pcSelect=1;     // to choose pc in muxPC
     }
 
     void stage2(){

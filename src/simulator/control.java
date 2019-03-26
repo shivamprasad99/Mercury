@@ -12,9 +12,9 @@ public class control{
     static boolean condition_signal_blt = false; // control unit must set these accordingly
     static boolean condition_signal_bne = false; // control unit must set these accordingly
     static boolean condition_signal_bltu = false; // control unit must set these accordingly
-    static int b_select, y_select, pc_select, inc_select, ma_select;
     static int ry, rz;
-    static int muxB, muxY;
+    static int muxB, muxY, muxPc, muxMa, muxInc;
+    static int memoryData;
     static register_file register_file_object = new register_file();
     static instructions instruction_object;
     static memory memory_object = new memory();
@@ -23,7 +23,7 @@ public class control{
     static int line_no;
     static stageTwoDecode decoder_object = new stageTwoDecode(); 
     static int which_instruction;
-    static controlUnit = new controlUnit();
+    static controlUnit controlUnitObject = new controlUnit();
 
 
     // control(){
@@ -42,7 +42,7 @@ public class control{
 
     // seperate line_no and machine code.
     
-    static String convert_machine_code_line_to_instruction(String line){
+    static String seperate_line_and_machineCode(String line){
         char[] char_line = line.toCharArray();  // convert String to char_array
         line_no = (int)(char_line[0]) - 48;     // getting line_no
         int i = 1;
@@ -67,8 +67,33 @@ public class control{
     //     return s[1];
     // }
 
+    static void setMuxValues(){
+        if(controlUnitObject.pcSelect == 1)
+            pc_object.muxPc = pc_value;
+        if(controlUnitObject.pcSelect == 0)
+            pc_object.muxPc = ra;
+        if(controlUnitObject.maSelect == 0)
+            muxMa = rz;
+        if(controlUnitObject.maSelect == 1)
+            muxMa = pc_value;
+        if(controlUnitObject.incSelect == 0)
+            pc_object.muxInc = 4;
+        if(controlUnitObject.incSelect == 1)
+            pc_object.muxInc = immidiate;
+        if(controlUnitObject.bSelect == 0)
+            muxB = rb;
+        if(controlUnitObject.bSelect == 1)
+            muxB = immidiate;
+        if(controlUnitObject.ySelect == 0)
+            ry = rz;
+        if(controlUnitObject.ySelect == 1)
+            ry = memoryData;
+        if(controlUnitObject.ySelect == 2)
+            ry = pc_object.pc_temp;
+    }
 
-    static void fetch(){
+
+    static void stage1(){
         IR = "";
         for(int i = 0; i < 4; i++){
             int val = memory_object.loadByte(pc_value);
@@ -77,7 +102,6 @@ public class control{
             IR = IR + s;
             pc_value++; 
         }
-       
     }
 
     static void change_conditional_signal(int which_instruction){
@@ -98,7 +122,7 @@ public class control{
 
 
 
-    static int decoder(){
+    static void decoder(){
         int which_instruction=0;
         
         ArrayList<Integer> rs1_rs2_rd_immidiate_n =  decoder_object.decode(IR);   
@@ -125,25 +149,7 @@ public class control{
             immidiate = rs1_rs2_rd_immidiate_n.get(3);
         }catch(Exception e){}
     
-        try{
-            String s = control_and_name_of_instruction.get_control_unit_values(which_instruction);
-            String[] c = s.split(" ");
-            char[] control_unit = c[1].toCharArray();
-            b_select = control_unit[0];
-            y_select = control_unit[1];
-            pc_select = control_unit[2];
-            inc_select = control_unit[3];
-            ma_select = control_unit[4];
-        }catch(Exception e){
-            System.out.println("wrong instruction");
-        }
-
-        
-        
         // System.out.println(ra + " "+rb+ " "+rd+ " "+immidiate);
-        
-
-        return which_instruction;
     }
 
 
@@ -151,10 +157,6 @@ public class control{
         kept ry and rz as string and if function return intger convert it to String.
     */
     static void ALU(){
-        switch(b_select) {
-            case 0: muxB = rb; break;
-            case 1: muxB = immidiate; break;
-        }
         if(which_instruction == 1 || which_instruction == 10 || (which_instruction >= 13 && which_instruction <= 17) || (which_instruction >= 27 && which_instruction <= 29)){
             rz = instruction_object.add(ra, muxB);    
         }           
@@ -191,8 +193,10 @@ public class control{
             
         }
         else if(which_instruction == 12){
-            int ry;
-            pc_temp = instruction_object.jalr(ra, muxB, pc_value);
+            instruction_object.jalr(ra, muxB, pc_value);
+        }
+        else if(which_instruction == 36){
+            instruction_object.jal(ra, muxB, pc_value);
         }
         // where is srl in which_instruction
         else if(which_instruction == 23){
@@ -216,25 +220,29 @@ public class control{
         else if(which_instruction == 14){
             rz = instruction_object.lw(ra, muxB);
         }
-        else if(which_instruction == )
     }
+
 
     static void memory_read_write(){
-        // get value of muxY
-
-
-        if(b_select == 0)
-            ry = rz;
-        else if(b_select == 1){
-            ry = memory_object.loadWord(rz);
+        // using muxMa
+        if(controlUnitObject.memRead == 1 && which_instruction == 13){
+            memoryData = memory_object.loadByte(muxMa);
         }
-        else if(b_select == 2){
-            ry = pc_temp;
+        if(controlUnitObject.memRead == 1 && which_instruction == 14){
+            memoryData = memory_object.loadWord(muxMa);
+        }
+        if(controlUnitObject.memWrite == 1 && which_instruction == 27){
+            memory_object.storeDataByte(rm, muxMa);
+        }
+        if(controlUnitObject.memWrite == 1 && which_instruction == 29){
+            memory_object.storeDataWord(rm, muxMa);
         }
     }
 
+
     static void writeBack(){
-        register_file_object.store_in_register(rd, ry);
+        if(controlUnitObject.rfWrite == 1)
+            register_file_object.store_in_register(rd, ry);
     }
 
 
@@ -272,7 +280,7 @@ public class control{
             while((line = file_reader.readLine()) !=null){
                 if(line.length() == 0)
                     continue;
-                line = convert_machine_code_line_to_instruction(line);
+                line = seperate_line_and_machineCode(line);
                 System.out.print(line+" ");
                 storing_in_memory(line);
             }
@@ -286,14 +294,36 @@ public class control{
 
         while(pc_value < memory_object.code_start){
             // System.out.println(pc_value + " " + memory_object.code_start);
-            fetch();
             
-            which_instruction = decoder();
+            controlUnitObject.stage1();
+            setMuxValues();
+            System.out.println("PC "+ pc_value);
+            stage1();
+            // controlUnit.reset();
+            controlUnitObject.stage2();
+            setMuxValues();
+            System.out.println("PC "+ pc_value);
+            decoder();
             
+            // controlUnit.reset();
+            controlUnitObject.setInstruction(which_instruction);
+            controlUnitObject.stage3();
+            setMuxValues();
+            System.out.println("PC "+ pc_value);
             ALU();
+            /// call setMuxInc()
             
-            memory_read_write();
+            // controlUnit.reset();
+            setMuxValues();         // for muxMa
+            controlUnitObject.stage4();
+            setMuxValues();
+            System.out.println("PC "+ pc_value);
+            memory_read_write();    // for ry
 
+            // controlUnit.reset();
+            controlUnitObject.stage5();
+            setMuxValues();
+            System.out.println("PC "+ pc_value);
             writeBack();
         }
     }
