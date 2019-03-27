@@ -52,6 +52,9 @@ public class controlUnit{
         if(whichInstruction==25){
             aSelect=1;      //for auipc
         }
+        else if(whichInstruction==26){
+            aSelect=2;      //for lui
+        }
         else aSelect=0;
 
 

@@ -103,7 +103,8 @@ public class control{
             muxA=ra;
         if(controlUnitObject.aSelect==1)
             muxA=pc_value;              //auipc
-
+        if(controlUnitObject.aSelect==2)
+            muxA=0;             //lui
     }
 
 
@@ -218,10 +219,12 @@ public class control{
             
         }
         else if(which_instruction == 25 || which_instruction == 26){
-            int temp;
+            //  int temp;
+            // temp=muxB<<20;
+            //rz=muxA+temp;
             // give pc to ra and immediate value to muxB
             // ALU will do the 12 bit shifting for you
-            temp = instruction_object.wide_immediate_addition(muxA, muxB);
+            rz = instruction_object.wide_immediate_addition(muxA, muxB);
         }
         else if(which_instruction == 30){
             if(condition_signal_beq==true){
