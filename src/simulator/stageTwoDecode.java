@@ -114,9 +114,9 @@ public class stageTwoDecode{
 					int foo = binaryToSigned(strRs1);
 					return foo;
             }else if(insType.equals("UJ")){
-				String strRs1 = inst.charAt(0) + inst.substring(12,20) + inst.charAt(11) + inst.substring(1,11);
+				String strRs1 = inst.substring(0,1) + inst.substring(12,20) + inst.substring(11, 12) + inst.substring(1,11);
 				int foo = binaryToSigned(strRs1);
-				return foo;
+				return foo*2;
 			}else if(insType.equals("U")){
 				String strRs1 = inst.substring(0, 20);
 				int foo = Integer.parseInt(strRs1, 2);
@@ -126,9 +126,11 @@ public class stageTwoDecode{
 				int foo = binaryToSigned(strRs1);
 				return foo;
 			}else if(insType.equals("SB")){
-				String strRs1 = inst.charAt(0) + inst.charAt(24) + inst.substring(1,7) + inst.substring(20,24);
+				String strRs1 ="";
+				strRs1 = inst.substring(0,1) + inst.substring(24,25) + inst.substring(1,7) + inst.substring(20,24);
+				System.out.println("srr "+ strRs1);
 				int foo = binaryToSigned(strRs1);
-				return foo;
+				return foo*2;
 			}
 			return -1; // wrong input
 		}
@@ -308,6 +310,7 @@ public class stageTwoDecode{
 					}
 			}catch(Exception e){
 				System.out.println("1.Wrong instruction");
+				System.exit(0);
 			}
 			// System.out.println("Size = "+retVal.get(4));
 			instructionType = "";

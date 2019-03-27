@@ -1,5 +1,4 @@
-package lexer;
-import grammar.*;
+
 import java.util.*;
 import java.io.*;
 
@@ -32,10 +31,10 @@ public class lexical{
         ins.put("andi",new Data("0010011","","111"));
         ins.put("jalr",new Data("1100111","","000"));
         ins.put("lb",new Data("0000011","","000"));
-        ins.put("lw",new Data("0010011","","010"));
-        ins.put("lh",new Data("0010011","","001"));
-        ins.put("lhu",new Data("0010011","","101"));
-        ins.put("lbu",new Data("0010011","","100"));
+        ins.put("lw",new Data("0000011","","010"));
+        ins.put("lh",new Data("0000011","","001"));
+        ins.put("lhu",new Data("0000011","","101"));
+        ins.put("lbu",new Data("0000011","","100"));
         //  ins.put("lwu",new Data(("0010011","","000"));
         ins.put("ori",new Data("0010011","","110"));
         ins.put("slli",new Data("0010011","","001"));
@@ -82,10 +81,30 @@ public class lexical{
         return ans.toString();
     }
 
+    private static String findTwoscomplement(StringBuffer str)
+    {
+        int n = str.length();
+        int i;
+        for (i = n-1 ; i >= 0 ; i--)
+            if (str.charAt(i) == '1')
+                break;
+        if (i == -1)
+            return "1" + str;
+        for (int k = i-1 ; k >= 0; k--)
+        {
+            if (str.charAt(k) == '1')
+                str.replace(k, k+1, "0");
+            else
+                str.replace(k, k+1, "1");
+        }
+        return str.toString();
+    }
+
     private static String immediateToBits(String str,int length){  // accepts a +ve decimal value and returns converted binary string
         StringBuffer ans = new StringBuffer(length);
-        int val = 0;
-        for(int i=0;i<str.length();i++){
+        int val = 0,start = 0;
+        if(str.charAt(0) == '-') start = 1;
+        for(int i=start;i<str.length();i++){
             val = val*10 + Character.getNumericValue(str.charAt(i));
         }
         for(int i=0;i<length;i++){
@@ -98,6 +117,7 @@ public class lexical{
             val /= 2;
         }
         ans.reverse();
+        if(start == 1) return findTwoscomplement(ans);
         return ans.toString();
     }
 
@@ -172,16 +192,19 @@ public class lexical{
     }
 
     private static String decode_S(Yylex lexer,String instruction){
+        System.out.println(lexer.yytext());
         System.out.println(lexer.yylineno());
         StringBuffer output = new StringBuffer(32);
         Data d = ins.get(instruction);
         try {
             lexer.yylex();
+            System.out.println(lexer.yytext());
             String rs2 = registerToBits(lexer.yytext());
             lexer.yylex();
             String rs1 = registerToBits(lexer.yytext());
             lexer.yylex();
             String imm = immediateToBits(lexer.yytext(),12);
+            System.out.println(rs2+" "+rs1);
             output.append(imm.substring(0,7));
             output.append(rs2);
             output.append(rs1);
@@ -228,7 +251,7 @@ public class lexical{
             String rs2 = registerToBits(lexer.yytext());
             lexer.yylex();
             String imm = immediateToBits(lexer.yytext(),13);
-            System.out.println(imm);
+//            System.out.println(imm);
             output.append(imm.charAt(0));
             output.append(imm.substring(2,8));
             output.append(rs2);
@@ -246,57 +269,77 @@ public class lexical{
     }
 
     public static void main( String[] argv ) {
+        int line = 0;
         initialize();
+        String ar[] = new String[1];
+        ar[0] = "src/lexer/test";
+        preLexical.main(ar);
         try {
-            if ( argv.length != 1 )
-                throw new Error( "Usage: java Main filename" );
-            File file = new File(argv[0]);
+            File file = new File("./modified.asm");
             BufferedReader br = new BufferedReader(new FileReader(file));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("converted.mc"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("../simulator/converted.mc"));
             Yylex lexer = new Yylex(br);
             int n = 0;
-            while(n>=0){
-                if(n==3){
-                    String decoded = decode_R(lexer,lexer.yytext());
-                    writer.write(Integer.toString(lexer.yylineno()));
-                    writer.write("\t");
+            while (n >= 0) {
+                if (n == 3) {
+                    String decoded = decode_R(lexer, lexer.yytext());
+                    writer.write(Integer.toString(line));
+                    writer.write(" ");
                     writer.write(decoded);
                     writer.write("\n");
+                    int k = lexer.yylex();
+                    if(k==18 || k==0)
+                        line ++;
                 }
-                if(n==4){
-                    String decoded = decode_I(lexer,lexer.yytext());
-                    writer.write(Integer.toString(lexer.yylineno()));
-                    writer.write("\t");
+                if (n == 4) {
+                    String decoded = decode_I(lexer, lexer.yytext());
+                    writer.write(Integer.toString(line));
+                    writer.write(" ");
                     writer.write(decoded);
                     writer.write("\n");
+                    int k = lexer.yylex();
+                    if(k==18 || k==0)
+                        line ++;
                 }
-                if(n==5){
-                    String decoded = decode_U(lexer,lexer.yytext());
-                    writer.write(Integer.toString(lexer.yylineno()));
-                    writer.write("\t");
+                if (n == 5) {
+                    String decoded = decode_U(lexer, lexer.yytext());
+                    writer.write(Integer.toString(line));
+                    writer.write(" ");
                     writer.write(decoded);
                     writer.write("\n");
+                    int k = lexer.yylex();
+                    if(k==18 || k==0)
+                        line ++;
                 }
-                if(n==6){
-                    String decoded = decode_S(lexer,lexer.yytext());
-                    writer.write(Integer.toString(lexer.yylineno()));
-                    writer.write("\t");
+                if (n == 6) {
+                    String decoded = decode_S(lexer, lexer.yytext());
+                    writer.write(Integer.toString(line));
+                    writer.write(" ");
                     writer.write(decoded);
                     writer.write("\n");
+                    int k = lexer.yylex();
+                    if(k==18 || k==0)
+                        line ++;
                 }
-                if(n==7){
-                    String decoded = decode_SB(lexer,lexer.yytext());
-                    writer.write(Integer.toString(lexer.yylineno()));
-                    writer.write("\t");
+                if (n == 7) {
+                    String decoded = decode_SB(lexer, lexer.yytext());
+                    writer.write(Integer.toString(line));
+                    writer.write(" ");
                     writer.write(decoded);
                     writer.write("\n");
+                    int k = lexer.yylex();
+                    if(k==18 || k==0)
+                        line ++;
                 }
-                if(n==8){
-                    String decoded = decode_UJ(lexer,lexer.yytext());
-                    writer.write(Integer.toString(lexer.yylineno()));
-                    writer.write("\t");
+                if (n == 8) {
+                    String decoded = decode_UJ(lexer, lexer.yytext());
+                    writer.write(Integer.toString(line));
+                    writer.write(" ");
                     writer.write(decoded);
                     writer.write("\n");
+                    int k = lexer.yylex();
+                    if(k==18 || k==0)
+                        line ++;
                 }
                 n = lexer.yylex();
             }

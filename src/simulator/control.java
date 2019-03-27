@@ -303,7 +303,7 @@ public class control{
         register_file_object.store_in_register(2,memory_object.stack_start);
         
         try{
-            file_reader = new BufferedReader(new FileReader("./test"));    
+            file_reader = new BufferedReader(new FileReader("./converted.mc"));    
             String line = "";
             
             while((line = file_reader.readLine()) !=null){
