@@ -15,7 +15,7 @@ public class controlUnit{
 
         //control signals for data Path
 
-    protected int bSelect, ySelect, cSelect, aluOp, condtSignals, rfWrite;
+    protected int aSelect, bSelect, ySelect, cSelect, aluOp, condtSignals, rfWrite;
 
         //control signals for processor-memory interface and IR control signals
 
@@ -49,6 +49,12 @@ public class controlUnit{
     }
 
     void stage3(){
+        if(whichInstruction==25){
+            aSelect=1;      //for auipc
+        }
+        else aSelect=0;
+
+
         if(whichInstruction<10||(whichInstruction>29&&whichInstruction!=36))    //instruction requiring register B
             bSelect=0;      //0 for rb
         else bSelect=1;     //1 for immediate

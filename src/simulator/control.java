@@ -1,7 +1,10 @@
+package  simulator;
 import java.io.*;
 import java.util.*;
 import java.nio.*;
 import java.lang.Math;
+
+
 
 public class control{ 
     static String IR = "";
@@ -13,7 +16,7 @@ public class control{
     static boolean condition_signal_bne = false; // control unit must set these accordingly
     static boolean condition_signal_bltu = false; // control unit must set these accordingly
     static int ry, rz;
-    static int muxB, muxY, muxPc, muxMa, muxInc;
+    static int muxA,muxB, muxY, muxPc, muxMa, muxInc;
     static int memoryData;
     static register_file register_file_object = new register_file();
     static instructions instruction_object;
@@ -96,6 +99,11 @@ public class control{
             ry = memoryData;
         if(controlUnitObject.ySelect == 2)
             ry = pc_object.pc_temp;
+        if(controlUnitObject.aSelect==0)
+            muxA=ra;
+        if(controlUnitObject.aSelect==1)
+            muxA=pc_value;              //auipc
+
     }
 
 
@@ -164,37 +172,37 @@ public class control{
     */
     static void ALU(){
         if(which_instruction == 1 || which_instruction == 10 || (which_instruction >= 13 && which_instruction <= 17) || (which_instruction >= 27 && which_instruction <= 29)){
-            rz = instruction_object.add(ra, muxB);    
+            rz = instruction_object.add(muxA, muxB);
         }           
         else if(which_instruction == 2 || which_instruction == 11){
-            rz = instruction_object.and(ra, muxB);
+            rz = instruction_object.and(muxA, muxB);
             
         }
         else if(which_instruction == 3 || which_instruction == 18){
-            rz = instruction_object.or_(ra, muxB);
+            rz = instruction_object.or_(muxA, muxB);
             
         }
         else if(which_instruction == 4 || which_instruction == 19){
-            rz = instruction_object.sll(ra, muxB);
+            rz = instruction_object.sll(muxA, muxB);
             
         }
         else if(which_instruction == 5 || which_instruction == 20){
-            rz = instruction_object.slt(ra, muxB);
+            rz = instruction_object.slt(muxA, muxB);
             
         }
         else if(which_instruction == 6 || which_instruction == 21){
-            rz = instruction_object.sltu(ra, muxB);
+            rz = instruction_object.sltu(muxA, muxB);
             
         }
         else if(which_instruction == 7 || which_instruction == 22){
-            rz = instruction_object.sra(ra, muxB);
+            rz = instruction_object.sra(muxA, muxB);
             
         }
         else if(which_instruction == 8){
-            rz = instruction_object.sub(ra, muxB);
+            rz = instruction_object.sub(muxA, muxB);
         }
         else if(which_instruction == 9 || which_instruction == 24){
-            rz = instruction_object.xor(ra, muxB);
+            rz = instruction_object.xor(muxA, muxB);
         }
         else if(which_instruction == 12){   // jalr
             pc_value = pc_object.adder(pc_value);
@@ -206,14 +214,14 @@ public class control{
         // where is srl in which_instruction
         else if(which_instruction == 23){
             int temp;
-            temp = instruction_object.srl(ra, muxB);
+            temp = instruction_object.srl(muxA, muxB);
             
         }
         else if(which_instruction == 25 || which_instruction == 26){
             int temp;
             // give pc to ra and immediate value to muxB
             // ALU will do the 12 bit shifting for you
-            temp = instruction_object.wide_immediate_addition(ra, muxB);
+            temp = instruction_object.wide_immediate_addition(muxA, muxB);
         }
         else if(which_instruction == 30){
             if(condition_signal_beq==true){
@@ -335,7 +343,7 @@ public class control{
             // controlUnit.reset();
             controlUnitObject.setInstruction(which_instruction);
             controlUnitObject.stage3();
-            setMuxValues();
+            setMuxValues();https://advitiya.in/viewhttps://advitiya.in/view
             ALU();
             /// call setMuxInc()
             
